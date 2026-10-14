@@ -1,0 +1,16 @@
+# regenerable simulation chunks (~530 MB) - rebuild with: python pipeline/run_all.py
+checkpoints/
+# raw downloads (re-fetched by pipeline/data_fetch.py)
+data/raw/
+
+# python
+__pycache__/
+*.pyc
+
+# personal / non-code: pitch decks, concept doc, WhatsApp images (kept locally in docs/)
+docs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.tmp

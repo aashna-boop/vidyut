@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vidyut — grid intelligence</title>
+<meta name="description" content="Vidyut predicts curtailment, finds faults and heals the feeder. A prototype simulated on real grid models and real hourly data.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- preloader -->
+<div id="pre" aria-hidden="true">
+  <div class="top mono">Vidyut · grid intelligence</div>
+  <svg class="mark" viewBox="0 0 100 100"><path id="markp" d="M58 6 L26 56 H48 L40 94 L76 40 H54 Z"/><circle cx="58" cy="6" r="6"/></svg>
+  <div class="count" id="pcount">000</div>
+  <div class="lbl mono">Loading the grid<br><span id="plbl">Energising 179 buses</span></div>
+</div>
+
+<div class="cur cur-ring-w" id="cur"><div class="cur-ring"><span></span></div></div>
+<div class="cur" id="curdot"><div class="cur-dot"></div></div>
+<div id="prog"></div>
+<div id="side-idx" class="mono">01 / 08 — Grid</div>
+
+<header id="nav">
+  <a href="#hero" class="logo" data-cur="HOME"><svg viewBox="0 0 100 100"><path d="M58 6 L26 56 H48 L40 94 L76 40 H54 Z"/><circle cx="58" cy="6" r="7"/></svg>VIDYUT</a>
+  <div class="pill mono"><i></i><span>Simulated · <b data-stat="global.grids">4</b> grids online</span></div>
+  <div class="nav-r"><button class="btn line mono" id="navlock" data-mag><span>Tap to lock</span></button><button class="btn menu-btn mono" id="menubtn" data-mag><span>Menu</span></button></div>
+</header>
+
+<nav id="menu" aria-label="Sections">
+  <ul>
+    <li><a href="#hero" data-menu><small>01</small>Grid</a></li>
+    <li><a href="#manifesto" data-menu><small>02</small>Why</a></li>
+    <li><a href="#grids" data-menu><small>03</small>Four grids</a></li>
+    <li><a href="#split" data-menu><small>04</small>Predict / Heal</a></li>
+    <li><a href="#roster" data-menu><small>05</small>Roster</a></li>
+    <li><a href="#proof" data-menu><small>06</small>Proof</a></li>
+    <li><a href="#sources" data-menu><small>07</small>Sources</a></li>
+    <li><a href="#scada" data-menu><small>08</small>SCADA (mock)</a></li>
+    <li><a href="#founders" data-menu><small>09</small>Founders</a></li>
+  </ul>
+  <div class="foot mono"><span>Prototype · simulated on real grid models</span><span>Esc to close</span></div>
+</nav>
+
+<main>
+<!-- 01 HERO -->
+<section id="hero" data-idx="01 / 09 — Grid" data-bg="sand">
+  <canvas id="gridcv"></canvas>
+  <div class="hero-foot mono"><span>Real Oberrhein topology · 179 buses</span><span>Move to energise · lock to break it</span></div>
+  <div class="topo-tabs" id="tabs"></div>
+  <div class="hud" id="hud">
+    <div class="mono" style="color:var(--moss)" id="hudk">Fault injection · replay of a real run</div>
+    <h4 id="hudt">Click any bus</h4>
+    <ol id="hudl"><li>Fault + feeder trip</li><li>Localize (Vidyut model)</li><li>Isolate the faulted zone</li><li>Reclose upstream</li><li>Close tie switches</li></ol>
+    <div class="bar"><b id="hudbar"></b></div>
+    <div class="mets mono"><span id="hudserved">— MW served</span><span id="hudtot">—</span></div>
+    <p class="msg" id="hudmsg">Every step below was actually computed with an AC power flow on the real switch model; this is a replay.</p>
+  </div>
+  <div class="hint mono">Click any bus to inject a fault</div>
+  <div class="hero-in">
+    <div class="eyebrow mono"><span>Grid intelligence</span><span>·</span><span>2026 prototype</span><span>·</span><span>Simulated, not field-validated</span></div>
+    <h1 class="hero-word disp" id="hword" aria-label="Vidyut"></h1>
+    <div class="hero-sub">
+      <p>Predict where the grid will choke. Find the fault. Heal the feeder.</p>
+      <div class="r"><a class="btn mono" href="#manifesto" data-mag><span>Scroll ↓</span></a><button class="btn brass mono" id="lockbtn" data-mag><span>Tap to lock</span></button></div>
+    </div>
+  </div>
+  <button class="btn line mono back" id="backbtn"><span>Back to scroll</span></button>
+</section>
+
+<!-- 02 MANIFESTO -->
+<section id="manifesto" data-idx="02 / 09 — Why" data-bg="sand">
+  <div class="kicker mono">Why Vidyut</div>
+  <p class="mtext" id="mtext">Solar is outrunning the wires. Vidyut forecasts <b class="hl">where the grid will choke</b>, finds a fault the moment it appears and <b class="hl">reroutes power around it</b> before a crew is dispatched.</p>
+  <p class="mnote">That's the ambition. What exists today is a prototype: real grid models, real hourly weather and demand, real power-flow physics — and no field data. Everything on this page says which is which.</p>
+</section>
+
+<!-- 03 GRIDS -->
+<section id="grids" data-idx="03 / 09 — Four grids" data-bg="bone">
+  <div class="g-head"><div><div class="kicker mono">One pipeline · four grids</div><h2 class="disp"><span class="rv"><span>Real grids.</span></span><span class="rv"><span>Not toy graphs.</span></span></h2></div>
+    <p style="max-width:34ch;color:rgba(34,40,31,.7)">Published benchmark networks with real impedances, driven by <b data-stat="global.days_de" data-fmt="int">1,816</b> real days of hourly solar and demand. Scroll sideways.</p></div>
+  <div class="g-track-wrap"><div class="g-track" id="gtrack"></div></div>
+</section>
+
+<!-- 04 PREDICT / HEAL -->
+<section id="split" data-idx="04 / 09 — Predict / Heal" data-bg="sand">
+  <div class="half pred" id="hp">
+    <div class="mono n">01 — Curtailment forecasting</div>
+    <h2 class="disp">Predict</h2>
+    <div class="body">
+      <span class="tag">Next hour · every bus</span>
+      <canvas class="chart" id="weekchart"></canvas>
+      <div class="kv"><div><b data-stat="oberrhein.p1_f1" data-fmt="f2">—</b><span class="mono">event F1</span></div><div><b data-stat="oberrhein.p1_f1_persist" data-fmt="f2">—</b><span class="mono">"repeat last hour"</span></div></div>
+      <p>Held-out year 2019, Oberrhein. Real 2019 week shown: actual curtailment vs the model's next-hour forecast. Labels come from our own curtailment rule — it learns the simulator, not a utility's logs.</p>
+    </div>
+  </div>
+  <div class="half heal" id="hh">
+    <div class="mono n">02 — Fault isolation &amp; service restoration</div>
+    <h2 class="disp">Heal</h2>
+    <div class="body">
+      <span class="tag">Real tie switches</span>
+      <div class="kv"><div><b data-stat="oberrhein.restored" data-fmt="pct1">—</b><span class="mono">avoidable load restored</span></div><div><b data-stat="oberrhein.isolated" data-fmt="pct1">—</b><span class="mono">isolated ≤ 3 tries</span></div></div>
+      <p>Every feeder bus faulted once at the 2019 peak-load hour. Localize, isolate just the faulted zone, then re-route through tie switches — each step checked by AC power flow.</p>
+      <button class="btn brass mono" id="tryit" data-mag><span>Break the grid yourself</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ROSTER -->
+<section id="roster" data-idx="05 / 09 — Roster" data-bg="sand">
+  <div class="r-head"><div><div class="kicker mono">The roster</div><h2 class="disp"><span class="rv"><span>Grid hall</span></span><span class="rv"><span>of fame</span></span></h2></div>
+    <p style="max-width:32ch;color:rgba(34,40,31,.7)">Hover for the real topology. Click to load it into the hero and break it.</p></div>
+  <div class="rows" id="rows"></div>
+</section>
+<div id="peek"><canvas id="peekcv"></canvas></div>
+
+<!-- 06 PROOF -->
+<section id="proof" data-idx="06 / 09 — Proof" data-bg="ink">
+  <div class="kicker mono">Proof — with the fine print</div>
+  <h2 class="disp"><span class="rv"><span>Real numbers.</span></span><span class="rv"><span>Real caveats.</span></span></h2>
+  <div class="tiles" id="tiles"></div>
+</section>
+
+<!-- 07 SOURCES -->
+<section id="sources" data-idx="07 / 09 — Sources" data-bg="sand">
+  <div class="wrap"><div><div class="kicker mono">Data &amp; sources</div><h2 class="disp" style="font-size:clamp(56px,9vw,150px)"><span class="rv"><span>What's real</span></span><span class="rv"><span>what isn't</span></span></h2></div>
+    <p style="max-width:36ch;color:rgba(34,40,31,.7)">Filled = used. Outlined = tried and <b>not obtainable</b> — so it was not faked.</p></div>
+  <div class="mq" id="mq1"></div>
+  <div class="mq out" id="mq2" style="margin-top:1vh"></div>
+  <div class="ledger">
+    <div class="lcol real"><div class="tag">Real</div><h5>Recorded &amp; published</h5><ul>
+      <li>Grid topologies and impedances (pandapower benchmarks)</li><li>AC power flow — every hour, every grid</li><li>German hourly solar &amp; demand, 2015–2019 (OPSD)</li><li>Indian hourly irradiance (NASA POWER) — modelled, not metered</li></ul></div>
+    <div class="lcol"><div class="tag">Assumed</div><h5>Choices we made</h5><ul>
+      <li>PV capacity, calibrated to equal stress on every grid</li><li>Curtailment rule (1.05 pu / 100% loading)</li><li>Fault = extra draw at a bus; sensor noise levels</li><li>Sectionalisers on CIGRE &amp; Kerber (none shipped)</li></ul></div>
+    <div class="lcol mock"><div class="tag">Not available</div><h5>Said plainly</h5><ul>
+      <li>No Indian demand or Indian feeder model</li><li>No field data, no real incidents</li><li>No validated predictive-maintenance accuracy</li><li>SCADA layer is a mock</li></ul></div>
+  </div>
+</section>
+
+<!-- 08 SCADA -->
+<section id="scada" data-idx="08 / 09 — SCADA" data-bg="moss">
+  <div>
+    <span class="mockbadge mono">Mock · not connected to any utility</span>
+    <div class="kicker mono" style="color:var(--sage)">Integration layer</div>
+    <h2 class="disp">Speaks<br>61850</h2>
+    <p>Vidyut reads breaker state and measurements, publishes forecasts and localizations, and issues switching commands with select-before-operate — using IEC 61850-style tags, plus a DNP3-style point map for legacy RTUs.</p>
+    <p class="mono" style="opacity:.75">Tag names follow 61850 conventions; they must be checked against a utility's SCL files before real use.</p>
+  </div>
+  <div class="term"><header class="mono"><span id="termt">oberrhein · replaying a real event</span><span>● live</span></header><div class="lines" id="tlines"></div></div>
+</section>
+</main>
+
+<!-- 09 FOUNDERS -->
+<section id="founders" data-idx="09 / 09 — Founders" data-bg="bone">
+  <div class="kicker mono">Who's behind Vidyut</div>
+  <h2 class="disp"><span class="rv"><span>Three people.</span></span><span class="rv"><span>One grid problem.</span></span></h2>
+  <p class="f-note">Bios and photos below are placeholders — LinkedIn blocks automated access, so nothing here was guessed or invented. Real content goes in as soon as it's supplied.</p>
+  <div class="founders">
+    <article class="fcard">
+      <div class="favatar" aria-hidden="true"><span>AS</span></div>
+      <h3>Aashna Suman</h3>
+      <span class="frole mono">Founder</span>
+      <p class="fbio">Add a short bio here.</p>
+      <span class="flink mono">LinkedIn — add link</span>
+    </article>
+    <article class="fcard">
+      <div class="favatar" aria-hidden="true"><span>MT</span></div>
+      <h3>Madhav Tiwari</h3>
+      <span class="frole mono">Founder</span>
+      <p class="fbio">Add a short bio here.</p>
+      <span class="flink mono">LinkedIn — add link</span>
+    </article>
+    <article class="fcard">
+      <div class="favatar" aria-hidden="true"><span>AA</span></div>
+      <h3>Aarush Agrawal</h3>
+      <span class="frole mono">Founder</span>
+      <p class="fbio">Add a short bio here.</p>
+      <span class="flink mono">LinkedIn — add link</span>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="foot" data-idx="09 / 09 — Founders" data-bg="ink">
+  <div class="kicker mono" style="color:var(--sage)">Keep going</div>
+  <div class="cta">
+    <a class="btn brass mono" href="../vidyut_3d_visualization.html" data-mag><span>Open the 3D lab →</span></a>
+    <a class="btn line mono" href="../README.md" data-mag><span>Read the honest README</span></a>
+    <button class="btn line mono" id="fbreak" data-mag><span>Break the grid again</span></button>
+  </div>
+  <div class="big-foot" id="bigfoot" aria-label="Always on"></div>
+  <div class="fmeta mono"><span>© 2026 Vidyut · prototype</span><p>All figures on this page are computed from the project's result files. This is a simulation on German benchmark grids with real hourly German data (and Indian solar in one exploratory variant); it has not been validated on a real feeder.</p></div>
+</footer>
+
+<noscript><div class="noscript">This site is built around interactive animation and needs JavaScript.</div></noscript>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="data/site-data.js"></script>
+<script src="js/grid.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

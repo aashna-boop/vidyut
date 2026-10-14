@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vidyut — Grid Intelligence Prototype</title>
+<style>
+  :root{--bg:#0A0E14;--panel:#0F141C;--line:#232B3A;--text:#E7ECF3;--dim:#7C8AA0;
+    --cyan:#49D6E0;--amber:#F0A947;--red:#E5525D;--gold:#E8C468;--green:#5CCB8A;--slate:#3A4658;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden}
+  #scene{position:absolute;inset:0}
+  .mono{font-family:Consolas,'Liberation Mono',Menlo,monospace}
+  #topbar{position:absolute;top:0;left:0;right:0;padding:14px 22px;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;gap:16px}
+  #title{pointer-events:auto;max-width:520px}
+  #title h1{margin:0;font-size:17px;font-weight:600}
+  #title p{margin:3px 0 0;font-size:12px;color:var(--dim);line-height:1.4}
+  #ctl{pointer-events:auto;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  select{background:#171E2A;color:var(--text);border:1px solid var(--line);font-size:12px;padding:6px 8px}
+  #modes{display:flex;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .mode-btn{background:var(--panel);color:var(--dim);border:none;padding:8px 14px;font-size:12.5px;cursor:pointer}
+  .mode-btn:hover{color:var(--text)} .mode-btn.active{background:#171E2A;color:var(--cyan)}
+  #side{position:absolute;top:96px;right:18px;width:310px;max-height:calc(100% - 190px);overflow:auto;background:rgba(15,20,28,.93);border:1px solid var(--line);padding:14px;font-size:12.5px;pointer-events:auto}
+  #side h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:600}
+  .row{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid #182030}
+  .row:last-child{border-bottom:none} .k{color:var(--dim)} .v{font-weight:600;text-align:right}
+  .note{color:var(--dim);font-size:11.5px;line-height:1.5;margin:8px 0 0}
+  .warn{color:var(--amber)} .bad{color:var(--red)} .good{color:var(--green)}
+  #left{position:absolute;top:96px;left:18px;width:340px;max-height:calc(100% - 190px);overflow:auto;background:rgba(15,20,28,.93);border:1px solid var(--line);padding:14px;font-size:12.5px;pointer-events:auto;display:none}
+  #left h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);font-weight:600}
+  .stage{padding:6px 8px;border-left:3px solid #222b3a;margin:4px 0;color:var(--dim);cursor:pointer}
+  .stage.done{border-left-color:#3a5a6a;color:#a9b6c8}.stage.active{border-left-color:var(--cyan);color:var(--text);background:#121a26}
+  .stage.fail{border-left-color:var(--red)} .stage b{font-weight:600}
+  #scada{margin-top:10px;background:#090c12;border:1px solid #182030;padding:8px;height:170px;overflow:auto;font-size:10.5px;line-height:1.45;white-space:pre-wrap;word-break:break-all}
+  .tx{color:var(--cyan)} .rx{color:var(--gold)} .ev{color:#8fa3bd}
+  button.act{background:#171E2A;color:var(--cyan);border:1px solid var(--line);padding:6px 10px;font-size:12px;cursor:pointer;margin:2px 4px 2px 0}
+  button.act:hover{background:#1d2738}
+  #bottom{position:absolute;left:18px;right:340px;bottom:16px;pointer-events:auto}
+  #playbar{display:flex;align-items:center;gap:12px;background:rgba(15,20,28,.93);border:1px solid var(--line);padding:9px 14px}
+  #playBtn{width:30px;height:30px;background:#171E2A;border:1px solid var(--line);color:var(--cyan);cursor:pointer;flex:none}
+  #timeLabel{width:130px;flex:none;color:var(--dim);font-size:12px} #slider{flex:1;accent-color:var(--cyan)}
+  #hint{position:absolute;bottom:66px;left:18px;color:var(--dim);font-size:11px;pointer-events:none;opacity:.8}
+  #tip{position:absolute;pointer-events:none;background:#0F141C;border:1px solid var(--line);padding:4px 8px;font-size:11px;display:none}
+</style>
+</head>
+<body>
+<div id="scene"></div>
+<div id="tip" class="mono"></div>
+<div id="topbar">
+  <div id="title"><h1>VIDYUT — grid intelligence prototype</h1>
+    <p id="subtitle"></p></div>
+  <div id="ctl"><select id="topoSel"></select>
+    <div id="modes">
+      <button class="mode-btn active" data-mode="live">Live Grid</button>
+      <button class="mode-btn" data-mode="maint">Predictive Maintenance</button>
+      <button class="mode-btn" data-mode="loc">Fault Localization</button>
+      <button class="mode-btn" data-mode="fisr">Fault Injection + FISR</button>
+    </div></div>
+</div>
+<div id="left"></div>
+<div id="side"></div>
+<div id="hint">drag to orbit · scroll to zoom</div>
+<div id="bottom"><div id="playbar"><button id="playBtn">▶</button><div id="timeLabel" class="mono"></div>
+  <input type="range" id="slider" min="0" max="167" value="10" step="1">
+  <select id="speedSel"><option value="220">1x</option><option value="90" selected>3x</option><option value="35">8x</option></select></div></div>
+
+<script id="gridData" type="application/json">__VIDYUT_DATA_JSON__</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const DATA = JSON.parse(document.getElementById('gridData').textContent);
+let TP = null;                                  // current topology data
+let mode = 'live';
+
+// ---------------------------------------------------------------- scene
+const container = document.getElementById('scene');
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x0A0E14); scene.fog = new THREE.Fog(0x0A0E14, 420, 1000);
+const camera = new THREE.PerspectiveCamera(45, innerWidth/innerHeight, 0.1, 3000);
+const renderer = new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidth, innerHeight);
+container.appendChild(renderer.domElement);
+scene.add(new THREE.AmbientLight(0x8899bb, .65)); const dl = new THREE.DirectionalLight(0xffffff,.55); dl.position.set(120,220,80); scene.add(dl);
+scene.add(new THREE.GridHelper(420, 28, 0x1B2333, 0x141B26));
+let camAngle=.9, camElev=.62, camDist=340, camTarget=new THREE.Vector3(0,0,0), dragging=false, moved=false, lx=0, ly=0;
+function updCam(){camera.position.set(camTarget.x+camDist*Math.cos(camElev)*Math.sin(camAngle),camTarget.y+camDist*Math.sin(camElev),camTarget.z+camDist*Math.cos(camElev)*Math.cos(camAngle));camera.lookAt(camTarget);}
+renderer.domElement.addEventListener('mousedown',e=>{dragging=true;moved=false;lx=e.clientX;ly=e.clientY;});
+addEventListener('mouseup',()=>dragging=false);
+addEventListener('mousemove',e=>{ if(!dragging){hover(e);return;} if(Math.abs(e.clientX-lx)+Math.abs(e.clientY-ly)>2)moved=true;
+  camAngle-=(e.clientX-lx)*.005; camElev=Math.max(.15,Math.min(1.4,camElev+(e.clientY-ly)*.004)); lx=e.clientX;ly=e.clientY;updCam();});
+renderer.domElement.addEventListener('wheel',e=>{camDist=Math.max(60,Math.min(900,camDist+e.deltaY*.4));updCam();},{passive:true});
+updCam();
+
+// ---------------------------------------------------------------- topology objects
+let world = new THREE.Group(); scene.add(world);
+let busMeshes=[], spikeA=[], spikeP=[], lineObjs=[], stressMarkers=[], gapMarkers=[], beacons=[], pvIndex={};
+const V3 = (x,y,z)=>new THREE.Vector3(x,y,z);
+function loadColor(p){ if(p<55)return new THREE.Color(0x274056).lerp(new THREE.Color(0x49D6E0),p/55);
+  if(p<92)return new THREE.Color(0x49D6E0).lerp(new THREE.Color(0xF0A947),(p-55)/37);
+  return new THREE.Color(0xF0A947).lerp(new THREE.Color(0xE5525D),Math.min(1,(p-92)/25)); }
+function stressColor(s){return new THREE.Color(0x2A3244).lerp(new THREE.Color(0xE5525D),s/100);}
+function makeBeacon(hex,h){const g=new THREE.Group();
+  const beam=new THREE.Mesh(new THREE.CylinderGeometry(.35,.35,h,8),new THREE.MeshBasicMaterial({color:hex,transparent:true,opacity:.55})); beam.position.y=h/2;
+  const ball=new THREE.Mesh(new THREE.SphereGeometry(2.1,12,12),new THREE.MeshBasicMaterial({color:hex})); ball.position.y=h;
+  g.add(beam);g.add(ball);g.visible=false;return g;}
+
+function buildTopology(name){
+  scene.remove(world); world.traverse(o=>{if(o.geometry)o.geometry.dispose();}); world=new THREE.Group(); scene.add(world);
+  TP=DATA.topos[name]; busMeshes=[];spikeA=[];spikeP=[];lineObjs=[];stressMarkers=[];gapMarkers=[];pvIndex={};
+  const R=Math.max(1.1,Math.min(4,60/Math.sqrt(TP.nBus)));
+  const bg=new THREE.SphereGeometry(R,12,12), sg=new THREE.CylinderGeometry(R*.34,R*.34,1,6);
+  TP.pvBuses.forEach((b,i)=>pvIndex[b]=i);
+  TP.buses.forEach((b,i)=>{
+    const c=b.pv?0xE8C468:(b.ld?0x5B6B85:0x3A4658);
+    const m=new THREE.Mesh(bg,new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:.25}));
+    m.position.set(b.x,0,b.z); m.userData={i,base:c}; world.add(m); busMeshes.push(m);
+    for(const [arr,col,op] of [[spikeA,0xF0A947,.85],[spikeP,0x49D6E0,.55]]){
+      const s=new THREE.Mesh(sg,new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:op})); s.position.set(b.x+(arr===spikeP?R*.9:0),0,b.z); s.scale.set(arr===spikeP?.6:1,.001,arr===spikeP?.6:1); s.visible=false; world.add(s); arr.push(s);}
+  });
+  TP.lines.forEach((l,li)=>{
+    const a=TP.buses[l.f],b=TP.buses[l.t];
+    const geo=new THREE.BufferGeometry().setFromPoints([V3(a.x,.4,a.z),V3(b.x,.4,b.z)]);
+    const mat=new THREE.LineBasicMaterial({color:0x2A3244,transparent:true,opacity:.9}); const line=new THREE.Line(geo,mat); world.add(line);
+    const p=new THREE.Mesh(new THREE.SphereGeometry(R*.4,6,6),new THREE.MeshBasicMaterial({color:0x49D6E0})); p.visible=false; world.add(p);
+    const gap=new THREE.Mesh(new THREE.BoxGeometry(R*1.7,R*1.7,R*1.7),new THREE.MeshBasicMaterial({color:0xE5525D})); gap.position.set((a.x+b.x)/2,1.2,(a.z+b.z)/2); gap.visible=false; world.add(gap);
+    lineObjs.push({l,line,mat,p,a,b,t:Math.random(),gap});
+  });
+  TP.topStress.forEach(s=>{const a=TP.buses[s.f],b=TP.buses[s.t]; const m=new THREE.Mesh(new THREE.SphereGeometry(R*.7,8,8),new THREE.MeshBasicMaterial({color:0xE5525D,transparent:true}));
+    m.position.set((a.x+b.x)/2,3.5,(a.z+b.z)/2); m.visible=false; world.add(m); stressMarkers.push({m,s});});
+  beacons={true:makeBeacon(0xE5525D,26),pred:makeBeacon(0x49D6E0,26),c2:makeBeacon(0xF0A947,16),c3:makeBeacon(0xF0A947,12)};
+  Object.values(beacons).forEach(b=>world.add(b));
+  window.R=R; hour=Math.min(hour,TP.ll.length?TP.ll.length-1:0);
+  slider.max=Math.max(0,(TP.ll.length||1)-1);
+  document.getElementById('subtitle').textContent=TP.label+' — '+TP.nBus+' buses, '+TP.nLine+' lines. Real topology + impedances, real AC power flow, real hourly data ('+TP.nDays+' days simulated).';
+  fisrState=null; renderSide(); renderLeft();
+}
+
+// ---------------------------------------------------------------- state
+let hour=10, playing=false, msPerHour=90, acc=0, lastT=performance.now(), showPred=false;
+const slider=document.getElementById('slider'), timeLabel=document.getElementById('timeLabel');
+const maxCurt=()=>{let m=1e-6;(TP.curtA||[]).forEach(r=>r.forEach(v=>{if(v>m)m=v;}));return m;};
+function dayLabel(h){const d=Math.floor(h/24),hh=h%24;return (TP.dates[d]||('Day '+(d+1)))+' · '+String(hh).padStart(2,'0')+':00';}
+
+function applyLive(){
+  const h=Math.min(Math.floor(hour),TP.ll.length-1); if(h<0)return;
+  const mx=window._mx||(window._mx=maxCurt());
+  lineObjs.forEach(o=>{const pct=TP.ll[h][lineObjs.indexOf(o)]; o.mat.color.copy(loadColor(pct)); o.mat.opacity=.35+Math.min(1,pct/100)*.65;
+    o.t=(o.t+(.15+Math.min(1.2,pct/60))*.01)%1; o.p.visible=pct>3; o.p.position.lerpVectors(V3(o.a.x,.6,o.a.z),V3(o.b.x,.6,o.b.z),o.t); o.p.material.color.copy(loadColor(pct)); o.gap.visible=false;});
+  busMeshes.forEach(m=>{m.material.color.setHex(m.userData.base);m.material.emissive.setHex(m.userData.base);m.scale.set(1,1,1);});
+  spikeA.forEach(s=>s.visible=false); spikeP.forEach(s=>s.visible=false);
+  TP.pvBuses.forEach((b,i)=>{const a=TP.curtA[h][i]/mx*34; const s=spikeA[b]; s.visible=a>.6; s.scale.set(1,Math.max(.001,a),1); s.position.y=a/2;
+    if(showPred){const p=TP.curtP[h][i]/mx*34; const q=spikeP[b]; q.visible=p>.6; q.scale.set(.6,Math.max(.001,p),.6); q.position.y=p/2;}});
+  stressMarkers.forEach(m=>m.m.visible=false); Object.values(beacons).forEach(b=>b.visible=false);
+}
+function applyMaint(t){
+  lineObjs.forEach(o=>{o.mat.color.copy(stressColor(o.l.s));o.mat.opacity=.2+o.l.s/100*.3;o.p.visible=false;o.gap.visible=false;});
+  busMeshes.forEach(m=>{m.material.color.setHex(m.userData.base);m.scale.set(1,1,1);}); spikeA.forEach(s=>s.visible=false);spikeP.forEach(s=>s.visible=false);
+  stressMarkers.forEach(m=>{m.m.visible=true;const p=.7+.3*Math.sin(t*.004);m.m.scale.set(p,p,p);m.m.material.opacity=p;}); Object.values(beacons).forEach(b=>b.visible=false);
+}
+function applyLoc(t){
+  lineObjs.forEach(o=>{o.mat.color.set(0x1C2330);o.mat.opacity=.35;o.p.visible=false;o.gap.visible=false;});
+  busMeshes.forEach(m=>{m.material.color.setHex(m.userData.base);m.scale.set(1,1,1);}); spikeA.forEach(s=>s.visible=false);spikeP.forEach(s=>s.visible=false);
+  stressMarkers.forEach(m=>m.m.visible=false); Object.values(beacons).forEach(b=>b.visible=false);
+}
+
+// ---------------------------------------------------------------- FISR replay
+const STAGE_MS=2600;
+let fisrState=null, selBus=null;
+function pad(n){return String(n).padStart(3,'0');}
+const tag={pos:id=>`${TP.name}_${id}/XSWI1.Pos.stVal`, ctl:id=>`${TP.name}_${id}/CSWI1.Pos.ctlVal`,
+  v:b=>`${TP.name}_BUS${pad(b)}/MMXU1.PhV.phsA.cVal.mag.f`,
+  get loc(){return `${TP.name}_VIDYUT/VDYFLC1.LocBus.stVal`;}, get conf(){return `${TP.name}_VIDYUT/VDYFLC1.Conf.mag.f`;},
+  get fsr(){return `${TP.name}_VIDYUT/VDYFSR1.Stage.stVal`;}};
+
+function buildSequence(ev){
+  // stages: PRE, TRIP, LOCALIZED (UI-only: same state as TRIP + beacons), then ISOLATED/UPSTREAM/TIES or LOCKOUT
+  const S=ev.stages, seq=[]; const by=n=>S.find(s=>s.name===n);
+  seq.push({key:'pre',title:'0 · Normal operation',st:S[0],note:'All loads served. Fault about to occur.',log:()=>[
+    ['ev',`[SCADA→VIDYUT] ${tag.pos(ev.head_ids[0])} = 2 (closed) q=good`]]});
+  seq.push({key:'trip',title:'1 · Fault + feeder trip',st:by('FAULT + TRIP'),note:by('FAULT + TRIP').note,log:()=>{
+    const L=[['rx',`[SCADA→VIDYUT] ${tag.pos(ev.head_ids[0])} = 1 (open)  ← feeder-head breaker tripped`]];
+    ev.stages[1].dead.slice(0,4).forEach(b=>L.push(['rx',`[SCADA→VIDYUT] ${tag.v(b)} = 0.0  q=invalid`])); if(ev.stages[1].dead.length>4)L.push(['ev',`   … ${ev.stages[1].dead.length-4} more buses q=invalid`]); return L;}});
+  const att=ev.attempts||[];
+  seq.push({key:'loc',title:'2 · Localization (Vidyut model)',st:by('FAULT + TRIP'),note:`Ranked candidates: ${ev.ranked.slice(0,3).join(', ')} · top match score ${ev.score}`,log:()=>{
+    const L=[['tx',`[VIDYUT→SCADA] ${tag.loc} = ${ev.ranked[0]}`],['tx',`[VIDYUT→SCADA] ${tag.conf} = ${ev.score}`]];
+    att.forEach((a,i)=>{L.push(['ev',`   attempt ${i+1}: candidate bus ${a.candidate}, ${a.n_switch_ops} switch ops → ${a.hit?'fault ISOLATED':'reclose into live fault → trip → revert'}`]);}); return L;}});
+  if(ev.outcome==='restored'){
+    seq.push({key:'iso',title:'3 · Isolation',st:by('ISOLATED'),note:by('ISOLATED').note,log:()=>{const L=[];
+      ev.iso_ids.forEach(l=>{L.push(['tx',`[VIDYUT→SCADA] SELECT ${tag.ctl(l)}`]);L.push(['tx',`[VIDYUT→SCADA] OPERATE ${tag.ctl(l)} = 1 (open)`]);L.push(['rx',`[SCADA→VIDYUT] ${tag.pos(l)} = 1 (open)  cause=operated`]);}); return L;}});
+    seq.push({key:'up',title:'4 · Upstream restored',st:by('UPSTREAM RESTORED'),note:by('UPSTREAM RESTORED').note,log:()=>[
+      ['tx',`[VIDYUT→SCADA] OPERATE ${tag.ctl(ev.head_ids[0])} = 2 (close)`],['rx',`[SCADA→VIDYUT] ${tag.pos(ev.head_ids[0])} = 2 (closed)`]]});
+    seq.push({key:'tie',title:'5 · Tie-switch restoration',st:by('TIES CLOSED'),note:by('TIES CLOSED').note,log:()=>{const L=[];
+      ev.tie_ids.forEach(l=>{L.push(['tx',`[VIDYUT→SCADA] SELECT ${tag.ctl(l)}`]);L.push(['tx',`[VIDYUT→SCADA] OPERATE ${tag.ctl(l)} = 2 (close)`]);L.push(['rx',`[SCADA→VIDYUT] ${tag.pos(l)} = 2 (closed)  cause=operated`]);});
+      if(!ev.tie_ids.length)L.push(['ev','   no tie switch in reach / none needed']); return L;}});
+  } else {
+    seq.push({key:'lock',title:'3 · LOCKOUT (isolation failed)',st:by('LOCKOUT'),note:`Fault not isolated within ${att.length} attempt(s). Feeder stays de-energised until a crew intervenes.`,log:()=>[
+      ['bad','[VIDYUT] isolation failed — escalating to operator']],fail:true});
+  }
+  return seq;
+}
+
+function startFault(bus){
+  const ev=TP.events[String(bus)];
+  const left=document.getElementById('left');
+  if(!ev){ selBus=bus; fisrState=null; renderLeft(`<p class="note">No precomputed event for bus ${bus} (no valid fingerprint or run error).</p>`); return; }
+  if(ev.outcome==='substation_bus'){ selBus=bus; fisrState=null; renderLeft(`<p class="note warn">Bus ${bus} is a substation/HV bus: there is no feeder-head breaker on its path, so distribution FISR doesn't apply (needs substation/transmission protection). Pick a feeder bus.</p>`); return; }
+  selBus=bus; fisrState={ev,seq:buildSequence(ev),idx:0,t0:performance.now(),auto:true,logged:-1};
+  renderLeft(); logStage();
+}
+function logStage(){const f=fisrState; if(!f||f.logged>=f.idx)return; const box=document.getElementById('scada'); if(!box)return;
+  for(let k=f.logged+1;k<=f.idx;k++){ f.seq[k].log().forEach(([c,t])=>{const d=document.createElement('div');d.className=c;d.textContent=t;box.appendChild(d);}); }
+  f.logged=f.idx; box.scrollTop=box.scrollHeight; }
+function setStage(i){const f=fisrState; if(!f)return; f.idx=Math.max(0,Math.min(f.seq.length-1,i)); f.t0=performance.now(); renderLeft(true); logStage();}
+
+function applyFisr(t){
+  spikeA.forEach(s=>s.visible=false);spikeP.forEach(s=>s.visible=false);stressMarkers.forEach(m=>m.m.visible=false);
+  Object.values(beacons).forEach(b=>b.visible=false);
+  const f=fisrState;
+  const st=f?f.seq[f.idx].st:null;
+  const dead=new Set(st?st.dead:[]); const open=new Set(st?st.open:[]);
+  const key=f?f.seq[f.idx].key:'idle';
+  const tieSet=new Set(f?f.ev.tie_lines:[]); const isoSet=new Set(f?f.ev.iso_lines:[]);
+  const useFinal=f&&key==='tie'&&f.ev.final_ll;
+  busMeshes.forEach((m,i)=>{
+    let col=m.userData.base, em=.25, sc=1;
+    if(dead.has(i)){col=0x1a1f2b;em=.05;}
+    if(f&&f.ev.zone&&['iso','up','tie'].includes(key)&&f.ev.zone.includes(i)){col=0xF0A947;em=.6;sc=1.4;}
+    if(f&&i===f.ev.true_bus){col=0xE5525D;em=.9;sc=1.6+.3*Math.sin(t*.008);}
+    if(i===selBus&&!f){col=0xFFFFFF;em=.6;sc=1.5;}
+    m.material.color.setHex(col);m.material.emissive.setHex(col);m.material.emissiveIntensity=em;m.scale.set(sc,sc,sc);
+  });
+  lineObjs.forEach((o,li)=>{
+    const deadLine=dead.has(o.l.f)||dead.has(o.l.t)||open.has(li);
+    let color, op=.9;
+    if(!f){color=loadColor(TP.baseLL[li]);op=.35+Math.min(1,TP.baseLL[li]/100)*.65;}
+    else if(key==='pre'){color=loadColor(TP.baseLL[li]);op=.35+Math.min(1,TP.baseLL[li]/100)*.65;}
+    else if(useFinal&&!deadLine){color=loadColor(f.ev.final_ll[li]);op=.5+Math.min(1,f.ev.final_ll[li]/100)*.5;}
+    else if(deadLine){color=new THREE.Color(0x1C2330);op=.5;}
+    else{color=new THREE.Color(0x49D6E0);op=.8;}
+    if(f&&key==='tie'&&tieSet.has(li)){color=new THREE.Color(0x5CCB8A);op=1;}
+    o.mat.color.copy(color);o.mat.opacity=op;
+    const live=!deadLine&&!open.has(li)&&(!f||key!=='trip'||!deadLine);
+    o.p.visible=live&&(f?true:TP.baseLL[li]>3); o.t=(o.t+.012)%1; o.p.position.lerpVectors(V3(o.a.x,.6,o.a.z),V3(o.b.x,.6,o.b.z),o.t); o.p.material.color.copy(color);
+    o.gap.visible=!!f&&open.has(li)&&(isoSet.has(li)&&['iso','up','tie'].includes(key)||(!isoSet.has(li)&&open.has(li)&&(f.ev.tie_lines.includes(li)?key!=='tie':li===f.ev.head_line&&['trip','loc','iso'].includes(key))));
+    if(o.gap.visible){o.gap.material.color.setHex(li===f.ev.head_line?0xE5525D:(tieSet.has(li)?0xF0A947:0xE5525D));}
+  });
+  if(f){
+    const tb=busMeshes[f.ev.true_bus].position; beacons.true.position.set(tb.x,0,tb.z); beacons.true.visible=key!=='pre'; beacons.true.scale.setScalar(1+.2*Math.sin(t*.006));
+    if(['loc','iso','up','tie','lock'].includes(key)){
+      [['pred',0],['c2',1],['c3',2]].forEach(([n,k])=>{const b=f.ev.ranked[k]; if(b==null)return; const p=busMeshes[b].position; beacons[n].position.set(p.x,0,p.z); beacons[n].visible=true;});
+    }
+    if(f.auto&&t-f.t0>STAGE_MS&&f.idx<f.seq.length-1){setStage(f.idx+1);}
+  }
+}
+
+// ---------------------------------------------------------------- picking
+const ray=new THREE.Raycaster(), mouse=new THREE.Vector2(), tip=document.getElementById('tip');
+function pick(e){mouse.set(e.clientX/innerWidth*2-1,-(e.clientY/innerHeight)*2+1); ray.setFromCamera(mouse,camera);
+  const hit=ray.intersectObjects(busMeshes,false); return hit.length?hit[0].object.userData.i:null;}
+function hover(e){ if(mode!=='fisr'){tip.style.display='none';return;} const i=pick(e); if(i==null){tip.style.display='none';renderer.domElement.style.cursor='default';return;}
+  const ev=TP.events[String(i)]; tip.style.display='block'; tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY+12)+'px';
+  tip.textContent=`bus ${i}`+(ev?(ev.outcome==='substation_bus'?' · substation (n/a)':' · click to inject fault'):' · no data'); renderer.domElement.style.cursor='pointer';}
+renderer.domElement.addEventListener('click',e=>{ if(moved||mode!=='fisr')return; const i=pick(e); if(i!=null)startFault(i); });
+
+// ---------------------------------------------------------------- panels
+const side=document.getElementById('side');
+const pct=x=>x==null?'n/a':(x*100).toFixed(1)+'%';
+const sig=x=>x==null?'n/a':Number(x).toPrecision(3);
+function renderSide(){
+  if(!TP)return;
+  if(mode==='live'){
+    const h=Math.min(Math.floor(hour),TP.ll.length-1); const p1=TP.p1;
+    let cur=0,pr=0; if(h>=0&&TP.curtA.length){TP.curtA[h].forEach(v=>cur+=v);TP.curtP[h].forEach(v=>pr+=v);}
+    let body=`<h2>Live grid — real week, held-out year</h2>
+      <div class="row"><span class="k">Curtailment this hour</span><span class="v mono">${cur.toFixed(2)} MW</span></div>
+      <div class="row"><span class="k">Model's forecast for this hour</span><span class="v mono">${pr.toFixed(2)} MW</span></div>
+      <div class="row"><span class="k">PV / load ratio (assumed)</span><span class="v mono">${TP.pvRatio?TP.pvRatio.toFixed(2):'—'}×</span></div>
+      <label class="note" style="display:block"><input type="checkbox" id="predChk" ${showPred?'checked':''}> overlay forecast (cyan) next to actual (amber)</label>`;
+    if(p1){const m=p1.models,b=p1.best;
+      body+=`<h2 style="margin-top:14px">Product 1 — test on ${p1.test_days} unseen days (2019)</h2>
+      <table style="width:100%;font-size:11.5px;border-collapse:collapse"><tr class="k"><td></td><td class="v">MAE</td><td class="v">RMSE</td><td class="v">event F1</td></tr>
+      ${Object.keys(m).map(k=>`<tr${k===b?' style="color:var(--cyan)"':''}><td>${k}</td><td class="v mono">${sig(m[k].mae_per_bus)}</td><td class="v mono">${sig(m[k].rmse_per_bus)}</td><td class="v mono">${m[k].event_f1.toFixed(2)}</td></tr>`).join('')}</table>
+      <p class="note">MW per bus-hour, all hours (Kerber values are small because those are LV feeders). Best model: <b>${b}</b>. Beats mean-baseline MAE: <b class="${p1.beats_mean_mae?'good':'bad'}">${p1.beats_mean_mae}</b> · beats persistence RMSE: <b class="${p1.beats_persistence_rmse?'good':'bad'}">${p1.beats_persistence_rmse}</b> · beats persistence MAE: <b class="${p1.beats_persistence_mae?'good':'bad'}">${p1.beats_persistence_mae}</b>. Only real, computed numbers; see README.</p>`;}
+    side.innerHTML=body; const c=document.getElementById('predChk'); if(c)c.onchange=()=>showPred=c.checked;
+  } else if(mode==='maint'){
+    side.innerHTML=`<h2>Predictive maintenance</h2><p class="note" style="margin-top:0">Physics-based <b>stress ranking</b> only (cumulative (loading%)² — an I²R heating proxy — over ${TP.nDays} real simulated days).</p>
+      <p class="note warn"><b>No accuracy number exists for this product</b> and none is shown: there is no public dataset of real grid-equipment failures to validate against, anywhere. The old "days to attention" extrapolation was removed — it was not grounded in data.</p>
+      ${TP.topStress.map(s=>`<div class="row"><span class="k">bus ${s.f} ↔ ${s.t}</span><span class="v mono">${s.score}/100</span></div>`).join('')}`;
+  } else if(mode==='loc'){
+    const r=TP.p2?TP.p2.results:null;
+    side.innerHTML=`<h2>Fault / theft localization</h2><p class="note" style="margin-top:0">${TP.p2?TP.p2.n:0} trials at random <b>real 2019 operating points</b>, anomaly = 0.5–2% of network load, with sensor noise.</p>`+
+     (r?`<table style="width:100%;font-size:11.5px;border-collapse:collapse"><tr class="k"><td></td><td class="v">exact</td><td class="v">≤2 hops</td><td class="v">≤5 hops</td></tr>
+     ${[['V@100','V only, all sensors'],['VTI@100','V+angle+current, all sensors'],['V@30','V only, 30% sensors'],['VTI@30','V+angle+current, 30% sensors']].map(([k,l])=>`<tr><td>${l}</td><td class="v mono">${pct(r[k].exact)}</td><td class="v mono">${pct(r[k].within2)}</td><td class="v mono">${pct(r[k].within5)}</td></tr>`).join('')}</table>`:'<p class="note">no data</p>')+
+     `<p class="note">"V only" is the original prototype's method. The improvement comes from adding voltage-angle and line-current measurements — an assumed sensor suite (see README), not a free lunch.</p>`;
+  } else {
+    const s=TP.fisrStats;
+    side.innerHTML=`<h2>FISR — sweep over every feeder bus</h2>`+(s?`
+      <div class="row"><span class="k">Faults tested</span><span class="v mono">${s.n_faults}</span></div>
+      <div class="row"><span class="k">Localized exactly (peak-load snapshot)</span><span class="v mono">${pct(s.localization_exact_at_snapshot)}</span></div>
+      <div class="row"><span class="k">Isolated within 3 attempts</span><span class="v mono">${pct(s.vidyut_isolated_within_3_attempts)}</span></div>
+      <div class="row"><span class="k">Lockout (isolation failed)</span><span class="v mono">${pct(s.vidyut_lockout)}</span></div>
+      <div class="row"><span class="k">Avoidable load restored (incl. lockouts)</span><span class="v mono">${pct(s.vidyut_mean_restored_frac_of_avoidable_incl_lockouts)}</span></div>
+      <div class="row"><span class="k">— with PERFECT localization</span><span class="v mono">${pct(s.oracle_mean_restored_frac_of_avoidable)}</span></div>
+      <div class="row"><span class="k">Real tie switches</span><span class="v mono">${TP.ties.length}</span></div>
+      <p class="note">Operating point: real peak-load hour of 2019 (${TP.snapshot.date||''} ${String(TP.snapshot.hour).padStart(2,'0')}:00). ${TP.assumedSectionalisers?'<span class="warn">Sectionalising switches are ASSUMED on lines that have none in this benchmark.</span>':'Switch model is the network\'s own.'} ${TP.ties.length?'':'<span class="warn">No tie switches exist in this grid, so downstream customers cannot be restored — isolation only.</span>'}</p>`:'<p class="note">no data</p>')+
+      `<p class="note">Click any bus in the 3D view to inject a fault there.</p>`;
+  }
+}
+function renderLeft(keep){
+  const left=document.getElementById('left');
+  if(mode!=='fisr'){left.style.display='none';return;}
+  left.style.display='block';
+  if(typeof keep==='string'){left.innerHTML=`<h2>Fault injection + self-healing</h2>${keep}`;return;}
+  const f=fisrState;
+  if(!f){ left.innerHTML=`<h2>Fault injection + self-healing</h2><p class="note" style="margin-top:0">Click a bus to inject a fault. Vidyut's localization model reads the (noisy) voltage/angle/current signature, then the switching engine isolates the faulted zone and restores everyone else through real tie switches — each step verified by AC power flow.</p>
+    <button class="act" id="rndBtn">Inject at random feeder bus</button><p class="note">Results are precomputed by actually running the model + power flow for every bus (README explains how); this page replays them.</p>`;
+    document.getElementById('rndBtn').onclick=()=>{const ks=Object.keys(TP.events).filter(k=>TP.events[k].outcome&&TP.events[k].outcome!=='substation_bus'); startFault(+ks[Math.floor(Math.random()*ks.length)]);}; return;}
+  const ev=f.ev, m=ev.metrics||{};
+  const tot=ev.total_load_mw, st=f.seq[f.idx].st;
+  left.innerHTML=`<h2>Fault at bus ${ev.true_bus}</h2>
+    ${f.seq.map((s,i)=>`<div class="stage ${i<f.idx?'done':''} ${i===f.idx?'active':''} ${s.fail?'fail':''}" data-i="${i}"><b>${s.title}</b>${i===f.idx?`<div style="font-size:11.5px;margin-top:3px">${s.note}</div>`:''}</div>`).join('')}
+    <div style="margin:8px 0"><button class="act" id="prevB">◀</button><button class="act" id="pauseB">${f.auto?'❙❙ pause':'▶ auto'}</button><button class="act" id="nextB">▶</button><button class="act" id="rpB">⟲ replay</button><button class="act" id="rndB">random</button></div>
+    <div class="row"><span class="k">Load served now</span><span class="v mono">${st.served.toFixed(2)} / ${tot.toFixed(2)} MW</span></div>
+    <div class="row"><span class="k">Localized as</span><span class="v mono ${ev.ranked[0]===ev.true_bus?'good':'warn'}">bus ${ev.ranked[0]} ${ev.ranked[0]===ev.true_bus?'(exact)':'(true: '+ev.true_bus+')'}</span></div>
+    <div class="row"><span class="k">Isolation attempts</span><span class="v mono">${m.attempts}</span></div>
+    ${ev.outcome==='restored'?`<div class="row"><span class="k">Final: load served</span><span class="v mono">${pct(m.final_served_frac)}</span></div>
+    <div class="row"><span class="k">Unavoidable (fault zone) load</span><span class="v mono">${m.unavoidable_zone_load_mw.toFixed(3)} MW</span></div>
+    <div class="row"><span class="k">Avoidable load restored</span><span class="v mono">${pct(m.restored_frac_of_avoidable)}</span></div>
+    <div class="row"><span class="k">Voltage range after</span><span class="v mono">${ev.final_metrics.vmin.toFixed(3)}–${ev.final_metrics.vmax.toFixed(3)} pu</span></div>
+    <div class="row"><span class="k">Limit violations (before → after)</span><span class="v mono">${ev.stages[0].viol} → ${ev.final_metrics.violations}</span></div>`:`<div class="row"><span class="k">Outcome</span><span class="v bad">LOCKOUT</span></div>`}
+    <div id="scada" class="mono"></div><p class="note">Log = IEC 61850-style tags exchanged with the <b>mock</b> SCADA (no real utility system connected).</p>`;
+  left.querySelectorAll('.stage').forEach(e=>e.onclick=()=>{f.auto=false;setStage(+e.dataset.i);});
+  document.getElementById('prevB').onclick=()=>{f.auto=false;setStage(f.idx-1);};document.getElementById('nextB').onclick=()=>{f.auto=false;setStage(f.idx+1);};
+  document.getElementById('pauseB').onclick=()=>{f.auto=!f.auto;f.t0=performance.now();renderLeft(true);};
+  document.getElementById('rpB').onclick=()=>startFault(ev.true_bus);
+  document.getElementById('rndB').onclick=()=>{const ks=Object.keys(TP.events).filter(k=>TP.events[k].outcome&&TP.events[k].outcome!=='substation_bus'); startFault(+ks[Math.floor(Math.random()*ks.length)]);};
+  const box=document.getElementById('scada'); f.logged=-1; logStage();
+}
+
+// ---------------------------------------------------------------- wiring
+const topoSel=document.getElementById('topoSel');
+DATA.order.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=DATA.topos[k].label;topoSel.appendChild(o);});
+topoSel.onchange=()=>{window._mx=null;buildTopology(topoSel.value);};
+document.querySelectorAll('.mode-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.mode-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;
+  document.getElementById('bottom').style.display=mode==='live'?'block':'none'; if(mode!=='fisr'){fisrState=null;selBus=null;} renderSide();renderLeft();});
+slider.oninput=()=>{hour=+slider.value;timeLabel.textContent=TP.ll.length?dayLabel(hour):'';renderSide();};
+document.getElementById('playBtn').onclick=e=>{playing=!playing;e.target.textContent=playing?'❙❙':'▶';};
+document.getElementById('speedSel').onchange=e=>msPerHour=+e.target.value;
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+buildTopology(DATA.order[0]); timeLabel.textContent=TP.ll.length?dayLabel(hour):'';
+function tick(now){
+  const dt=now-lastT;lastT=now;
+  if(playing&&mode==='live'&&TP.ll.length){acc+=dt;if(acc>msPerHour){acc=0;hour=(hour+1)%TP.ll.length;slider.value=hour;timeLabel.textContent=dayLabel(hour);renderSide();}}
+  if(mode==='live'&&TP.ll.length)applyLive();else if(mode==='maint')applyMaint(now);else if(mode==='loc')applyLoc(now);else if(mode==='fisr')applyFisr(now);
+  renderer.render(scene,camera);requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+window.__vidyut={get TP(){return TP},startFault,setStage,get fisrState(){return fisrState},buildTopology};
+</script>
+</body>
+</html>
