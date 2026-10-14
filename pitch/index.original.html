@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidyut — Pitch Deck</title>
+  <meta name="description" content="Vidyut: grid intelligence that predicts curtailment, localizes faults and heals the feeder." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="progress"><span id="bar"></span></div>
+
+<header class="top" id="top">
+  <a class="mark" href="#head">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6 12h3.5L8 22l7-11h-3.5z"/></svg>
+    <span>Vidyut</span>
+  </a>
+  <nav class="top-links">
+    <a href="#why">Why</a>
+    <a href="#team">Team</a>
+    <a href="#how">How</a>
+    <a href="#tested">Proof</a>
+    <a href="#gaps">Next</a>
+  </nav>
+  <a class="cta" href="http://localhost:8080/" target="_blank" rel="noopener">Prototype <em>↗</em></a>
+</header>
+
+<main class="deck" id="deck">
+
+<!-- 1 · HEAD -->
+<section class="pane head" id="head">
+  <p class="meta mono"><span>AI-native grid intelligence</span><span>India · 2026</span></p>
+  <h1 class="lines">
+    <span class="line"><em>One hour before</em></span>
+    <span class="line"><em>the grid chokes,</em></span>
+    <span class="line"><em>Vidyut knows.</em></span>
+  </h1>
+  <p class="lede">A prototype that predicts solar curtailment, pinpoints faults and theft, and reroutes power — before the crew is called. Sense → Predict → Deliver: the two models are the product; sensors and dashboards are just the delivery layer.</p>
+  <a class="cta big" href="http://localhost:8080/" target="_blank" rel="noopener">Open the live prototype <em>↗</em></a>
+  <dl class="ticker">
+    <div><dt class="mono">Curtailment F1</dt><dd data-count="97" data-after="%">0%</dd></div>
+    <div><dt class="mono">Real grids</dt><dd data-count="4">0</dd></div>
+    <div><dt class="mono">Power-flow hours</dt><dd data-count="200" data-k="k">0k</dd></div>
+    <div><dt class="mono">Restorable power</dt><dd data-count="100" data-after="%">0%</dd></div>
+  </dl>
+</section>
+
+<!-- 2 · WHY -->
+<section class="pane why" id="why">
+  <h2 class="tag mono">01 · Why now</h2>
+  <div class="ledger two">
+    <article class="entry">
+      <span class="no mono">a</span>
+      <h3>Solar gets paid for nothing</h3>
+      <p>When the grid can't absorb an hour of sun, output is throttled on guesswork. In the Indian-solar test, curtailment filled 24–26% of stress-scale hours.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">b</span>
+      <h3>Losses hide in plain sight</h3>
+      <p>Faults and theft show up as unusual draws on sensors that are already installed — and sit there, unresolved, because nobody reads them fast enough.</p>
+    </article>
+  </div>
+  <p class="aside">The data exists. The decision doesn't.</p>
+</section>
+
+<!-- 3 · TEAM -->
+<section class="pane team" id="team">
+  <h2 class="tag mono">02 · Who's building it</h2>
+  <div class="ledger three">
+    <article class="entry"><h3>Aashna</h3><p class="k mono">Co-founder</p><p>AI/ML researcher — five published or accepted papers across AI ethics, anomaly detection, sustainability and EV optimization.</p></article>
+    <article class="entry"><h3>Aarush Agrawal</h3><p class="k mono">Co-founder · CTO</p><p>Builds the machine: the FISR engine, the SCADA / DERMS integration layer and the power-flow data pipeline behind every number on this page.</p></article>
+    <article class="entry"><h3>Madhav Tiwari</h3><p class="k mono">Co-founder</p><p>iOS, web and visual design — builds the interfaces and the brand that carries them.</p></article>
+  </div>
+  <p class="aside">Research + engineering + product, inside one team.</p>
+</section>
+
+<!-- 4 · HOW -->
+<section class="pane how" id="how">
+  <h2 class="tag mono">03 · How it works</h2>
+  <ol class="rail">
+    <li class="step"><span class="k mono">Sense</span><p>Voltage, angles, load and sunlight — pulled from meters the utility already owns. Nothing new gets installed to start.</p></li>
+    <li class="step"><span class="k mono">Predict</span><p>Two in-house models — a curtailment forecaster and a fault-theft localizer — are the core IP. Everything else wraps them.</p></li>
+    <li class="step"><span class="k mono">Deliver</span><p>Switching commands and forecasts, wired into SCADA / DERMS as recommendations or direct commands.</p></li>
+  </ol>
+</section>
+
+<!-- 5 · PRODUCT 1 — CURTAILMENT -->
+<section class="pane curtail" id="curtail">
+  <h2 class="tag mono">04 · Product 1 — Curtailment prediction</h2>
+  <p class="lede">One hour ahead, per topology: will part of this grid need to throttle solar? A temporal graph neural network and gradient-boosted trees, benchmarked against naive baselines.</p>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="97" data-after="%">0%</span><span class="l mono">event F1 on the unseen test year — skill holds on the Indian-solar variant too</span></div>
+    <div class="cell"><span class="n" data-count="99" data-prefix="0.">0</span><span class="l mono">network-total correlation, 0.97–0.99 across all grids</span></div>
+    <div class="cell"><span class="n" data-count="16" data-after=" pts">0 pts</span><span class="l mono">above the naive persistence baseline (81–84% event F1)</span></div>
+    <div class="cell"><span class="n" data-count="24" data-after="%">0%</span><span class="l mono">of test hours curtailed in the Indian-solar variant — 2.4× the German data</span></div>
+  </div>
+  <div class="ledger rows">
+    <div class="entry flat"><span class="k mono">Method</span><p>Trained chronologically — 2015–17 train, 2018 validation, 2019 test, never touched — and retrained per topology. A no-lag GBM scores within ~0.001: the skill is more than repeating the last value.</p></div>
+    <div class="entry flat"><span class="k mono">Boundary</span><p>Events are defined by the team's rule applied to real power-flow physics — proof the model learned that rule, not yet that it matches a utility's actual curtailment behavior.</p></div>
+  </div>
+</section>
+
+<!-- 6 · PRODUCT 2 — LOCALIZATION -->
+<section class="pane localize" id="localize">
+  <h2 class="tag mono">05 · Product 2 — Fault &amp; theft localization</h2>
+  <p class="lede">When an unusual draw appears, Vidyut matches the live disturbance against a library of fingerprints — what a problem at each bus would look like — by closest match, and names the culprit.</p>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="99" data-after="%">0%</span><span class="l mono">top-grid accuracy at full voltage + angle + current sensing</span></div>
+    <div class="cell"><span class="n" data-count="100" data-after="%">0%</span><span class="l mono">located within 5 hops on the best grid, full sensing</span></div>
+    <div class="cell"><span class="n" data-count="89" data-after="%">0%</span><span class="l mono">still within 5 hops at only 30% sensor coverage</span></div>
+    <div class="cell"><span class="n" data-count="300">0</span><span class="l mono">trials per topology — 30 real operating states × 10 faults</span></div>
+  </div>
+  <div class="ledger rows">
+    <div class="entry flat"><span class="k mono">Fixed</span><p>An operating-state mismatch bug was found and fixed along the way: it dropped exact-bus accuracy from 98% to ~41%. Fingerprints now match the actual pre-fault state — the PV and load level SCADA already knows.</p></div>
+    <div class="entry flat"><span class="k mono">Boundary</span><p>Voltage-only sensing is weak (6–65% exact). The full voltage + angle + current picture is where the method sings — all of it readable from existing instrumentation.</p></div>
+  </div>
+</section>
+
+<!-- 7 · SELF-HEALING -->
+<section class="pane heal" id="heal">
+  <h2 class="tag mono">06 · Self-healing (FISR)</h2>
+  <p class="lede">Trip, locate, isolate, restore — swept across every feeder bus of all four topologies, 593 faults, at the 2019 peak-load hour.</p>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="100" data-after="%">0%</span><span class="l mono">of restorable power recovered where tie routes exist (93–100%)</span></div>
+    <div class="cell"><span class="n" data-count="93" data-after="%">0%</span><span class="l mono">restored on the hardest grid using Vidyut's own localization</span></div>
+    <div class="cell"><span class="n" data-count="72" data-after="%">0%</span><span class="l mono">ceiling without tie routes — a limit of the wiring, not the software</span></div>
+    <div class="cell"><span class="n" data-count="322">0</span><span class="l mono">real switches and 6 ties on the large grid — a real switching plan</span></div>
+  </div>
+  <div class="ledger rows">
+    <div class="entry flat"><span class="k mono">Not modeled</span><p>Protection coordination and timing, load shedding, DER anti-islanding transients, multi-fault events. Stated plainly, not hidden. Grids without backup routes top out around 72% even with perfect localization — wiring, not software.</p></div>
+  </div>
+</section>
+
+<!-- 8 · MAINTENANCE + SCADA -->
+<section class="pane ops" id="ops">
+  <h2 class="tag mono">07 · Maintenance &amp; grid systems</h2>
+  <p class="lede">Two supporting layers ship with the same honesty standard: no invented accuracy numbers, no phantom utility connection.</p>
+  <div class="ledger two">
+    <article class="entry">
+      <span class="no mono">a</span>
+      <h3>Thermal wear ranking</h3>
+      <p>A physics-based stress ranking — cumulative (loading%)² per line, an I²R heating proxy over every simulated day, shown line-by-line in the 3D viewer. No failure predictor is claimed, because no public dataset of real grid-equipment failures exists to validate one against. Invented extrapolations were removed.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">b</span>
+      <h3>SCADA / DERMS bridge (mock)</h3>
+      <p>IEC 61850 object naming plus a DNP3-style point table; a working point database, state publishing from real power flow, and FISR switching through select-before-operate. After a run, its load-served and de-energized-bus state matches the physics engine digit for digit — 60.2525 MW vs 60.2525 MW. No wire protocol or utility system yet; none was available.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 9 · WHY US -->
+<section class="pane whyus" id="whyus">
+  <h2 class="tag mono">08 · Why Vidyut wins</h2>
+  <p class="lede">The competitive field splits three ways — dashboards that measure, hardware that installs, and decks that promise. Vidyut sits in the empty quadrant.</p>
+  <div class="ledger three">
+    <article class="entry">
+      <span class="no mono">a</span>
+      <h3>Models, not dashboards</h3>
+      <p>The core IP is two self-built ML models — protected by the hardest thing to copy: the dataset behind them. Analytics suites re-sell dashboards that measure the grid; Vidyut closes the loop and sends the switching command.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">b</span>
+      <h3>Runs on what's installed</h3>
+      <p>No hardware pilot phase, no capex handshake: voltage, angles, load and sunlight come from meters and SCADA the utility already owns. A competitor that needs new sensors sells a board meeting; Vidyut sells a go-live.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">c</span>
+      <h3>Checked against physics</h3>
+      <p>Every claim on this page came from AC power flow on published networks — restoration commands validated digit for digit against the physics engine, baselines included. Deck promises are cheap; physics is the referee.</p>
+    </article>
+  </div>
+  <p class="aside">Software-first. Sensor-light. Physics-checked.</p>
+</section>
+
+<!-- 10 · TESTED -->
+<section class="pane tested" id="tested">
+  <h2 class="tag mono">09 · What's real, what isn't</h2>
+  <div class="ledger rows">
+    <div class="entry flat"><span class="k mono">Real</span><p>Published grid topologies (179-bus Oberrhein, 15-bus CIGRE MV, two Kerber feeders), Newton-Raphson AC power flow every simulated hour (~44k–50k hours per topology), five years of recorded OPSD/ENTSO-E weather and demand — 1,816 fully observed days — plus real NASA POWER solar for the Indian variant, 2,099 days.</p></div>
+    <div class="entry flat"><span class="k mono">Injected</span><p>Fault and theft events are simulated — no utility anywhere publishes real incident data. Curtailment labels come from the team's own rule, applied to real physics. And the grids themselves are German benchmarks, not an Indian feeder.</p></div>
+    <div class="entry flat"><span class="k mono">Verdict</span><p>A rigorous, honestly-caveated proof-of-concept on real physics and real weather data — not yet a live Indian utility grid.</p></div>
+  </div>
+</section>
+
+<!-- 10 · GAPS -->
+<section class="pane gaps" id="gaps">
+  <h2 class="tag mono">10 · What's left</h2>
+  <div class="ledger two">
+    <article class="entry"><span class="no mono">a</span><h3>An Indian feeder model</h3><p>The grids are German benchmarks today. A real Indian feeder is the single biggest next step.</p></article>
+    <article class="entry"><span class="no mono">b</span><h3>Indian demand data</h3><p>The Indian variant pairs real Indian solar with a German demand shape. Indian load closes the loop.</p></article>
+    <article class="entry"><span class="no mono">c</span><h3>Real incident data</h3><p>Fault and theft events are injected — a utility partner sharing data changes the game.</p></article>
+    <article class="entry"><span class="no mono">d</span><h3>A field pilot</h3><p>Validation on a live Indian grid segment — the point where physics meets reality.</p></article>
+    <article class="entry"><span class="no mono">e</span><h3>Live SCADA protocols</h3><p>MMS / GOOSE / DNP3 on the wire, IEC 62351 security, mapped to a utility's actual SCL/ICD files.</p></article>
+    <article class="entry"><span class="no mono">f</span><h3>Cross-grid transfer</h3><p>Each model is retrained per topology today; testing transfer unlocks scale.</p></article>
+  </div>
+</section>
+
+<!-- 11 · ASK -->
+<section class="pane ask" id="ask">
+  <p class="meta mono"><span>11 · The ask</span></p>
+  <h2 class="lines">
+    <span class="line"><em>Partner with a feeder.</em></span>
+    <span class="line"><em>Let it fight a real one.</em></span>
+  </h2>
+  <p class="lede">Seed funding closes the two open gaps — an Indian feeder model and Indian demand data — and buys the first field pilot. Everything above already runs; this is what makes it real.</p>
+  <a class="cta big" href="http://localhost:8080/" target="_blank" rel="noopener">See it run <em>↗ localhost:8080</em></a>
+  <div class="contact mono">
+    <span>Reach the founders</span>
+    <a href="mailto:madhavtiwari.college@gmail.com" id="email-link">madhavtiwari.college@gmail.com</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="base mono">
+  <span>Vidyut</span><span>Sense · Predict · Deliver</span><span>2026</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

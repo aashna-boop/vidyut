@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vidyut — Pitch Deck</title>
+  <meta name="description" content="Vidyut: grid intelligence that predicts curtailment, localizes faults and heals the feeder." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="progress"><span id="bar"></span></div>
+
+<header class="top" id="top">
+  <a class="mark" href="#head">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6 12h3.5L8 22l7-11h-3.5z"/></svg>
+    <span>Vidyut</span>
+  </a>
+  <nav class="top-links">
+    <a href="#why">Why</a>
+    <a href="#team">Team</a>
+    <a href="#how">How</a>
+    <a href="#tested">Proof</a>
+    <a href="#gaps">Next</a>
+  </nav>
+  <a class="cta" href="../website/index.html" target="_blank" rel="noopener">Prototype <em>↗</em></a>
+</header>
+
+<main class="deck" id="deck">
+
+<!-- 1 · HEAD -->
+<section class="pane head" id="head">
+  <p class="meta mono"><span>AI-native grid intelligence</span><span>India · 2026</span></p>
+  <h1 class="lines">
+    <span class="line"><em>One hour before</em></span>
+    <span class="line"><em>the grid chokes,</em></span>
+    <span class="line"><em>Vidyut knows.</em></span>
+  </h1>
+  <p class="lede">Predicts solar curtailment. Pinpoints faults. Reroutes power — before a crew is called.</p>
+  <a class="cta big" href="../website/index.html" target="_blank" rel="noopener">Open the live prototype <em>↗</em></a>
+  <dl class="ticker">
+    <div><dt class="mono">Curtailment F1</dt><dd data-count="96" data-after="%">0%</dd></div>
+    <div><dt class="mono">Buses · 4 real grids</dt><dd data-count="604">0</dd></div>
+    <div><dt class="mono">Power-flow hours</dt><dd data-count="376" data-k="k">0k</dd></div>
+    <div><dt class="mono">Faults tested</dt><dd data-count="593">0</dd></div>
+  </dl>
+</section>
+
+<!-- 2 · WHY -->
+<section class="pane why" id="why">
+  <h2 class="tag mono">01 · Why now</h2>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="24" data-after="%">0%</span><span class="l mono">of hours need solar throttled (Indian-solar test)</span></div>
+    <div class="cell"><span class="n">2.4×</span><span class="l mono">more curtailment than the German baseline (9.5–11%)</span></div>
+    <div class="cell"><span class="n">6–65%</span><span class="l mono">fault-location accuracy from voltage alone</span></div>
+    <div class="cell"><span class="n" data-count="0">0</span><span class="l mono">public datasets of real grid faults, anywhere</span></div>
+  </div>
+  <p class="aside">The data exists. The decision doesn't.</p>
+</section>
+
+<!-- 3 · TEAM -->
+<section class="pane team" id="team">
+  <h2 class="tag mono">02 · Team of 3</h2>
+  <div class="ledger three">
+    <article class="entry"><h3>Aashna</h3><p class="k mono">Co-founder</p><p><b>5</b> published / accepted AI papers — ethics, anomaly detection, sustainability, EV optimization.</p></article>
+    <article class="entry"><h3>Aarush Agrawal</h3><p class="k mono">Co-founder · CTO</p><p>Built the FISR engine, SCADA / DERMS layer and power-flow pipeline.</p></article>
+    <article class="entry"><h3>Madhav Tiwari</h3><p class="k mono">Co-founder</p><p>iOS, web and visual design — the interface and brand.</p></article>
+  </div>
+  <p class="aside">Research + engineering + product.</p>
+</section>
+
+<!-- 4 · HOW -->
+<section class="pane how" id="how">
+  <h2 class="tag mono">03 · How it works</h2>
+  <ol class="rail">
+    <li class="step"><span class="k mono">Sense</span><p><b>3</b> signals — voltage, angle, current — from meters already installed. <b>0</b> new hardware.</p></li>
+    <li class="step"><span class="k mono">Predict</span><p><b>2</b> in-house models: curtailment forecaster + fault localizer.</p></li>
+    <li class="step"><span class="k mono">Deliver</span><p>Forecasts and switching commands into SCADA / DERMS.</p></li>
+  </ol>
+</section>
+
+<!-- 5 · PRODUCT 1 — CURTAILMENT -->
+<section class="pane curtail" id="curtail">
+  <h2 class="tag mono">04 · Product 1 — Curtailment, 1 hour ahead</h2>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="96" data-after="%">0%</span><span class="l mono">event F1, unseen 2019 test year (95.4–97.3% on all 8 runs)</span></div>
+    <div class="cell"><span class="n">0.99</span><span class="l mono">network-total correlation (0.97–0.99)</span></div>
+    <div class="cell"><span class="n">+14</span><span class="l mono">F1 points over "repeat last hour" (81–84%) — range +13 to +15</span></div>
+    <div class="cell"><span class="n">−78%</span><span class="l mono">error vs predict-the-mean on the main grid (−73% to −81%)</span></div>
+  </div>
+  <div class="bars" aria-label="Event F1 per grid, German 2019 test">
+    <div class="bar-row"><span class="mono">Oberrhein · 179 bus</span><div class="track"><i class="hi" style="--w:96.2%"></i><i class="lo" style="--w:82.1%"></i></div><b class="mono">96.2 vs 82.1</b></div>
+    <div class="bar-row"><span class="mono">CIGRE MV · 15 bus</span><div class="track"><i class="hi" style="--w:95.8%"></i><i class="lo" style="--w:81.1%"></i></div><b class="mono">95.8 vs 81.1</b></div>
+    <div class="bar-row"><span class="mono">Kerber Dorf · 116 bus</span><div class="track"><i class="hi" style="--w:95.4%"></i><i class="lo" style="--w:82.7%"></i></div><b class="mono">95.4 vs 82.7</b></div>
+    <div class="bar-row"><span class="mono">Kerber Vorstadt · 294 bus</span><div class="track"><i class="hi" style="--w:95.7%"></i><i class="lo" style="--w:81.2%"></i></div><b class="mono">95.7 vs 81.2</b></div>
+    <p class="legend mono"><span class="k1"></span>Vidyut F1 <span class="k2"></span>Persistence baseline</p>
+  </div>
+  <p class="note mono">Boundary — events follow our own curtailment rule on real power flow, not a utility's logs.</p>
+</section>
+
+<!-- 6 · PRODUCT 2 — LOCALIZATION -->
+<section class="pane localize" id="localize">
+  <h2 class="tag mono">05 · Product 2 — Fault &amp; theft localization</h2>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="99" data-after="%">0%</span><span class="l mono">exact-bus accuracy, best grid, full sensing</span></div>
+    <div class="cell"><span class="n" data-count="92" data-after="%">0%</span><span class="l mono">on the hardest grid (294 buses) — up from 6% voltage-only</span></div>
+    <div class="cell"><span class="n" data-count="89" data-after="%">0%</span><span class="l mono">still within 5 hops at 30% sensor coverage (worst grid)</span></div>
+    <div class="cell"><span class="n" data-count="300">0</span><span class="l mono">trials per grid: 30 real states × 10 faults</span></div>
+  </div>
+  <div class="bars" aria-label="Exact-bus accuracy per grid">
+    <div class="bar-row"><span class="mono">Oberrhein</span><div class="track"><i class="hi" style="--w:93.7%"></i><i class="lo" style="--w:28.3%"></i></div><b class="mono">28% → 94%</b></div>
+    <div class="bar-row"><span class="mono">CIGRE MV</span><div class="track"><i class="hi" style="--w:99.3%"></i><i class="lo" style="--w:65%"></i></div><b class="mono">65% → 99%</b></div>
+    <div class="bar-row"><span class="mono">Kerber Dorf</span><div class="track"><i class="hi" style="--w:96.3%"></i><i class="lo" style="--w:24%"></i></div><b class="mono">24% → 96%</b></div>
+    <div class="bar-row"><span class="mono">Kerber Vorstadt</span><div class="track"><i class="hi" style="--w:92.3%"></i><i class="lo" style="--w:6%"></i></div><b class="mono">6% → 92%</b></div>
+    <p class="legend mono"><span class="k1"></span>Voltage + angle + current <span class="k2"></span>Voltage only</p>
+  </div>
+  <p class="note mono">Bug found &amp; fixed: mismatched fingerprints cut accuracy 98% → 41%. At 30% coverage exact-bus accuracy is 35–59%.</p>
+</section>
+
+<!-- 7 · SELF-HEALING -->
+<section class="pane heal" id="heal">
+  <h2 class="tag mono">06 · Self-healing (FISR) — trip, locate, isolate, restore</h2>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="593">0</span><span class="l mono">faults swept — every feeder bus, 4 grids, 2019 peak-load hour</span></div>
+    <div class="cell"><span class="n">94–100%</span><span class="l mono">faults isolated within 3 attempts</span></div>
+    <div class="cell"><span class="n">93–100%</span><span class="l mono">of restorable power back where tie routes exist</span></div>
+    <div class="cell"><span class="n" data-count="72" data-after="%">0%</span><span class="l mono">ceiling with no tie routes — a wiring limit, not software</span></div>
+  </div>
+  <div class="bars" aria-label="Load restored per grid">
+    <div class="bar-row"><span class="mono">Oberrhein · 6 ties</span><div class="track"><i class="hi" style="--w:99.2%"></i><i class="lo" style="--w:93.5%"></i></div><b class="mono">93.5 / 99.2%</b></div>
+    <div class="bar-row"><span class="mono">CIGRE MV · 3 ties</span><div class="track"><i class="hi" style="--w:100%"></i><i class="lo" style="--w:100%"></i></div><b class="mono">100 / 100%</b></div>
+    <div class="bar-row"><span class="mono">Kerber Dorf · 0 ties</span><div class="track"><i class="hi" style="--w:72.3%"></i><i class="lo" style="--w:71.4%"></i></div><b class="mono">71.4 / 72.3%</b></div>
+    <div class="bar-row"><span class="mono">Kerber Vorstadt · 0 ties</span><div class="track"><i class="hi" style="--w:73.3%"></i><i class="lo" style="--w:71.9%"></i></div><b class="mono">71.9 / 73.3%</b></div>
+    <p class="legend mono"><span class="k1"></span>With perfect localization <span class="k2"></span>With Vidyut's localization</p>
+  </div>
+  <p class="note mono">Not modeled — protection timing, load shedding, DER anti-islanding, multi-fault events. 322 real switches on the large grid.</p>
+</section>
+
+<!-- 8 · MAINTENANCE + SCADA -->
+<section class="pane ops" id="ops">
+  <h2 class="tag mono">07 · Supporting layers</h2>
+  <div class="ledger two">
+    <article class="entry">
+      <span class="no mono">a</span>
+      <h3>Thermal wear ranking</h3>
+      <p>I²R stress ranking per line. <b>0</b> accuracy claimed — no public equipment-failure data exists to validate one.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">b</span>
+      <h3>SCADA / DERMS bridge (mock)</h3>
+      <p>IEC 61850 tags + DNP3-style point map. Plan result <b>60.2525 MW = 60.2525 MW</b> vs the physics engine. No utility connected yet.</p>
+    </article>
+  </div>
+</section>
+
+<!-- 9 · WHY US -->
+<section class="pane whyus" id="whyus">
+  <h2 class="tag mono">08 · Why Vidyut wins</h2>
+  <div class="ledger three">
+    <article class="entry">
+      <span class="no mono">2</span>
+      <h3>Models, not dashboards</h3>
+      <p>Closes the loop: sends the switching command, not just a chart.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">0</span>
+      <h3>New hardware</h3>
+      <p>Runs on meters and SCADA already installed — a go-live, not a capex cycle.</p>
+    </article>
+    <article class="entry">
+      <span class="no mono">593</span>
+      <h3>Physics-checked</h3>
+      <p>Every claim comes from AC power flow on published grids, baselines included.</p>
+    </article>
+  </div>
+  <p class="aside">Software-first. Sensor-light. Physics-checked.</p>
+</section>
+
+<!-- 10 · TESTED -->
+<section class="pane tested" id="tested">
+  <h2 class="tag mono">09 · What's real, what isn't</h2>
+  <div class="board">
+    <div class="cell"><span class="n" data-count="1816">0</span><span class="l mono">real German days, 2015–19 (OPSD / ENTSO-E)</span></div>
+    <div class="cell"><span class="n" data-count="2099">0</span><span class="l mono">real Indian-solar days (NASA POWER) — German demand shape</span></div>
+    <div class="cell"><span class="n">20×</span><span class="l mono">the 90 days of the first prototype</span></div>
+    <div class="cell"><span class="n" data-count="0">0</span><span class="l mono">real utility incidents — all faults injected</span></div>
+  </div>
+  <div class="ledger rows">
+    <div class="entry flat"><span class="k mono">Real</span><p>4 published grids (15–294 buses), AC power flow every hour, recorded weather and demand.</p></div>
+    <div class="entry flat"><span class="k mono">Injected</span><p>Faults, theft, curtailment labels. Grids are German benchmarks, not an Indian feeder.</p></div>
+    <div class="entry flat"><span class="k mono">Verdict</span><p>Rigorous proof-of-concept on real physics. Not yet a live Indian grid.</p></div>
+  </div>
+</section>
+
+<!-- 11 · GAPS -->
+<section class="pane gaps" id="gaps">
+  <h2 class="tag mono">10 · What's left — 6 steps</h2>
+  <div class="ledger three">
+    <article class="entry"><span class="no mono">1</span><h3>Indian feeder model</h3><p>Biggest next step.</p></article>
+    <article class="entry"><span class="no mono">2</span><h3>Indian demand data</h3><p>Replaces the German demand shape.</p></article>
+    <article class="entry"><span class="no mono">3</span><h3>Real incident data</h3><p>Needs a utility partner.</p></article>
+    <article class="entry"><span class="no mono">4</span><h3>Field pilot</h3><p>Validate on a live segment.</p></article>
+    <article class="entry"><span class="no mono">5</span><h3>Live SCADA protocols</h3><p>MMS / GOOSE / DNP3, IEC 62351.</p></article>
+    <article class="entry"><span class="no mono">6</span><h3>Cross-grid transfer</h3><p>Today: retrained per grid.</p></article>
+  </div>
+</section>
+
+<!-- 12 · ASK -->
+<section class="pane ask" id="ask">
+  <p class="meta mono"><span>11 · The ask</span></p>
+  <h2 class="lines">
+    <span class="line"><em>Partner with a feeder.</em></span>
+    <span class="line"><em>Let it fight a real one.</em></span>
+  </h2>
+  <p class="lede">Seed funding closes gaps 1–2 and buys the first field pilot (gap 4).</p>
+  <a class="cta big" href="../website/index.html" target="_blank" rel="noopener">See it run <em>↗</em></a>
+  <div class="contact mono">
+    <span>Reach the founders</span>
+    <a href="mailto:madhavtiwari.college@gmail.com" id="email-link">madhavtiwari.college@gmail.com</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="base mono">
+  <span>Vidyut</span><span>Sense · Predict · Deliver</span><span>2026</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
