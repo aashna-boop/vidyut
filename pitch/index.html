@@ -5,230 +5,245 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vidyut — Pitch Deck</title>
   <meta name="description" content="Vidyut: grid intelligence that predicts curtailment, localizes faults and heals the feeder." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="deck.css" />
 </head>
 <body>
-
-<div class="progress"><span id="bar"></span></div>
-
-<header class="top" id="top">
-  <a class="mark" href="#head">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6 12h3.5L8 22l7-11h-3.5z"/></svg>
-    <span>Vidyut</span>
-  </a>
-  <nav class="top-links">
-    <a href="#why">Why</a>
-    <a href="#team">Team</a>
-    <a href="#how">How</a>
-    <a href="#tested">Proof</a>
-    <a href="#gaps">Next</a>
-  </nav>
-  <a class="cta" href="../website/index.html" target="_blank" rel="noopener">Prototype <em>↗</em></a>
+<header class="topbar">
+  <a class="mark" href="#1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 6 12h3.5L8 22l7-11h-3.5z"/></svg><span>Vidyut</span></a>
+  <div class="tb-r"><span class="live mono" style="font-size:10px">Live simulation</span><a class="cta ghost" href="scroll-version.html">Scroll version</a><a class="cta" href="../website/index.html" target="_blank" rel="noopener">Prototype <em>↗</em></a></div>
 </header>
 
-<main class="deck" id="deck">
-
-<!-- 1 · HEAD -->
-<section class="pane head" id="head">
-  <p class="meta mono"><span>AI-native grid intelligence</span><span>India · 2026</span></p>
-  <h1 class="lines">
-    <span class="line"><em>One hour before</em></span>
-    <span class="line"><em>the grid chokes,</em></span>
-    <span class="line"><em>Vidyut knows.</em></span>
-  </h1>
-  <p class="lede">Predicts solar curtailment. Pinpoints faults. Reroutes power — before a crew is called.</p>
-  <a class="cta big" href="../website/index.html" target="_blank" rel="noopener">Open the live prototype <em>↗</em></a>
-  <dl class="ticker">
-    <div><dt class="mono">Curtailment F1</dt><dd data-count="96" data-after="%">0%</dd></div>
-    <div><dt class="mono">Buses · 4 real grids</dt><dd data-count="604">0</dd></div>
-    <div><dt class="mono">Power-flow hours</dt><dd data-count="376" data-k="k">0k</dd></div>
-    <div><dt class="mono">Faults tested</dt><dd data-count="593">0</dd></div>
-  </dl>
+<main class="stage" id="stage">
+<section class="slide dark s-title" data-title="Vidyut" data-group="Intro">
+<div class="cols c2 body" style="align-items:center">
+  <div class="col">
+    <p class="mono a" style="opacity:.7">AI-native grid intelligence · India · 2026</p>
+    <h1 class="disp a">One hour before<br>the grid chokes,<br><span class="vo">Vidyut knows.</span></h1>
+    <p class="lede a">Predicts solar curtailment. Pinpoints faults. Reroutes power — before a crew is called.</p>
+    <div class="actions a"><a class="cta big" href="../website/index.html" target="_blank" rel="noopener">Open the live prototype <em>↗</em></a><button class="cta big ghost" onclick="document.getElementById('next').click()">Start the pitch <em>→</em></button></div>
+  </div>
+  <div class="col"><figure class="shotwrap a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Vidyut prototype · live simulation</span></div><img src="img/product/lab_live_forecast.jpg" alt="Vidyut prototype · live simulation" loading="lazy" /></div><figcaption class="cap">Real simulation · Oberrhein grid · 2019 test week</figcaption></figure></div>
+</div>
 </section>
 
-<!-- 2 · WHY -->
-<section class="pane why" id="why">
-  <h2 class="tag mono">01 · Why now</h2>
-  <div class="board">
-    <div class="cell"><span class="n" data-count="24" data-after="%">0%</span><span class="l mono">of hours need solar throttled (Indian-solar test)</span></div>
-    <div class="cell"><span class="n">2.4×</span><span class="l mono">more curtailment than the German baseline (9.5–11%)</span></div>
-    <div class="cell"><span class="n">6–65%</span><span class="l mono">fault-location accuracy from voltage alone</span></div>
-    <div class="cell"><span class="n" data-count="0">0</span><span class="l mono">public datasets of real grid faults, anywhere</span></div>
+<section class="slide " data-title="Clean power, switched off" data-group="Problem">
+<h2 class="tag mono a"><span class="n">01</span>The problem, in the news</h2>
+<div class="cols c2 body">
+  <figure class="photo a"><img src="img/space.jpg" alt="Satellite view of the Bhadla Solar Park in Rajasthan" /><figcaption>Bhadla Solar Park, Rajasthan, from space<span>Contains modified Copernicus Sentinel data 2020 (ESA) · via <a href="https://commons.wikimedia.org/wiki/File:2020-05-20,_Sentinel-2A_L1C,_True_color_(1).jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
+  <div class="col">
+    <h2 class="disp a">Clean power,<br><span class="vo">switched off</span></h2>
+    <p class="pict a" aria-label="Fourteen houses, each representing about 100,000 homes"><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg><svg viewBox="0 0 24 24" class="hh"><path d="M3 12 12 4l9 8h-2.5v8h-13v-8z" fill="#1E1B14"/><rect x="10" y="14" width="4" height="6" fill="#F0EADD"/></svg></p>
+    <p class="cap a">Each house ≈ 100,000 homes' yearly electricity. India curtailed that much solar in April–June 2026 alone.</p>
+    <ul class="news a">
+      <li><a href="https://www.businesstoday.in/industry/infra/story/grid-bottleneck-india-forced-to-switch-off-enough-solar-power-to-run-1-4-million-homes-545746-2026-07-28" target="_blank" rel="noopener"><b>Grid bottleneck: India forced to switch off enough solar power to run 1.4 million homes</b></a><span class="mono">Business Today · 28 Jul 2026</span><p>8.1 TWh of solar curtailed in one quarter.</p></li>
+      <li><a href="https://www.pv-magazine.com/2026/07/08/one-third-of-indias-new-renewable-energy-capacity-faces-curtailment-due-to-grid-constraints/" target="_blank" rel="noopener"><b>One-third of India's new renewable energy capacity faces curtailment</b></a><span class="mono">pv magazine · 8 Jul 2026</span><p>Transmission isn't keeping pace with new solar.</p></li>
+    </ul>
   </div>
-  <p class="aside">The data exists. The decision doesn't.</p>
+</div>
 </section>
 
-<!-- 3 · TEAM -->
-<section class="pane team" id="team">
-  <h2 class="tag mono">02 · Team of 3</h2>
-  <div class="ledger three">
-    <article class="entry"><h3>Aashna</h3><p class="k mono">Co-founder</p><p><b>5</b> published / accepted AI papers — ethics, anomaly detection, sustainability, EV optimization.</p></article>
-    <article class="entry"><h3>Aarush Agrawal</h3><p class="k mono">Co-founder · CTO</p><p>Built the FISR engine, SCADA / DERMS layer and power-flow pipeline.</p></article>
-    <article class="entry"><h3>Madhav Tiwari</h3><p class="k mono">Co-founder</p><p>iOS, web and visual design — the interface and brand.</p></article>
+<section class="slide " data-title="Losses & faults" data-group="Problem">
+<h2 class="tag mono a"><span class="n">02</span>The problem, in the news</h2>
+<div class="cols c2 body">
+  <div class="pcard a">
+    <figure class="photo"><img src="img/meters.jpg" alt="A wall of old electricity meters and tangled wiring in Kolkata" /><figcaption>Meters and wiring, Kolkata<span>Photo: Jorge Royan · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener">CC BY-SA 3.0</a> · via <a href="https://commons.wikimedia.org/wiki/File:India_-_Kolkata_electricity_meters_-_3832.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
+    <h3 class="disp">Losses hiding in the wires</h3>
+    <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="bignum">5,897</span><span class="mono" style="color:var(--soft);max-width:22ch">theft cases booked by one utility in one year</span></div>
+    <ul class="news"><li><a href="https://ianslive.in/adani-electricity-cuts-atc-losses-with-crackdown-on-power-theft--20260714130003" target="_blank" rel="noopener"><b>Adani Electricity cuts AT&amp;C losses with crackdown on power theft</b></a><span class="mono">IANS · 14 Jul 2026</span></li></ul>
   </div>
-  <p class="aside">Research + engineering + product.</p>
+  <div class="pcard a">
+    <figure class="photo"><img src="img/crew.jpg" style="object-position:50% 78%" alt="Silhouettes of power line workers on a substation at dusk" /><figcaption>Line workers at dusk<span>Photo: Sindugab · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> · via <a href="https://commons.wikimedia.org/wiki/File:Silhouette_of_power_line_workers.jpg" target="_blank" rel="noopener">Wikimedia Commons</a></span></figcaption></figure>
+    <h3 class="disp">Faults found by hand</h3>
+    <p class="lede">When a feeder trips, someone has to work out <b class="vo">where</b> — then switch around it.</p>
+    <p class="cap">That search-and-switch loop is what Vidyut automates. We found no published national restoration-time figure, so we cite none.</p>
+  </div>
+</div>
 </section>
 
-<!-- 4 · HOW -->
-<section class="pane how" id="how">
-  <h2 class="tag mono">03 · How it works</h2>
-  <ol class="rail">
-    <li class="step"><span class="k mono">Sense</span><p><b>3</b> signals — voltage, angle, current — from meters already installed. <b>0</b> new hardware.</p></li>
-    <li class="step"><span class="k mono">Predict</span><p><b>2</b> in-house models: curtailment forecaster + fault localizer.</p></li>
-    <li class="step"><span class="k mono">Deliver</span><p>Forecasts and switching commands into SCADA / DERMS.</p></li>
-  </ol>
+<section class="slide " data-title="The product in one picture" data-group="Product">
+<h2 class="tag mono a"><span class="n">03</span>What Vidyut is</h2>
+<h2 class="disp a">Sense. <span class="vo">Predict.</span> Deliver.</h2>
+<div class="flow body">
+  <div class="node a"><svg class="ico" viewBox="0 0 96 80" aria-hidden="true"><circle cx="20" cy="18" r="9" fill="#E8A325"/><g stroke="#1E1B14" stroke-width="2.5" stroke-linecap="round"><path d="M20 2v5M20 29v5M4 18h5M31 18h5M9 7l3 3M31 7l-3 3"/></g><g stroke="#1E1B14" stroke-width="3" fill="none" stroke-linecap="round"><path d="M10 78V38M10 44h74"/><path d="M4 50h12M10 38l-6 6m6-6l6 6"/></g><g fill="#1E1B14"><path d="M44 78V62l9-8 9 8v16z"/><path d="M70 78V62l9-8 9 8v16z" fill="#77836B"/></g></svg><h3>Your grid</h3><p>Meters, sensors and SCADA you already have. <b>No new hardware.</b></p><span class="mono" style="color:var(--olive)">voltage · angle · current · sunlight</span></div>
+  <div class="arrow a"><span class="mono">Sense</span><svg viewBox="0 0 80 24"><path d="M0 12h66" stroke="#1E1B14" stroke-width="3" class="dash" fill="none"/><path d="M62 4l14 8-14 8z" fill="#1E1B14"/></svg></div>
+  <div class="node brain a"><h3>Vidyut</h3>
+    <div class="sub"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M3 34 Q14 4 22 4 Q30 4 41 34" fill="none" stroke="#E8A325" stroke-width="3.5"/><line x1="3" y1="24" x2="41" y2="24" stroke="#F0EADD" stroke-width="2" stroke-dasharray="4 3"/></svg><div><b>Curtailment forecaster</b><small>Will solar need throttling in the next hour?</small></div></div>
+    <div class="sub"><svg viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="17" fill="none" stroke="#F0EADD" stroke-width="2.5"/><circle cx="22" cy="22" r="9" fill="none" stroke="#F0EADD" stroke-width="2.5"/><circle cx="22" cy="22" r="3.5" fill="#E8A325"/></svg><div><b>Fault &amp; theft locator</b><small>Which bus is the problem?</small></div></div>
+  </div>
+  <div class="arrow a"><span class="mono">Deliver</span><svg viewBox="0 0 80 24"><path d="M0 12h66" stroke="#1E1B14" stroke-width="3" class="dash" fill="none"/><path d="M62 4l14 8-14 8z" fill="#1E1B14"/></svg></div>
+  <div class="node a"><h3>The grid operator</h3><div class="outs">
+    <div class="out"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M3 29 Q10 4 17 4 Q24 4 31 29" fill="none" stroke="#E8A325" stroke-width="3"/><circle cx="17" cy="4" r="3.5" fill="#1E1B14"/></svg><div><b>Forecast</b><small>An hour's warning, per bus</small></div></div>
+    <div class="out"><svg viewBox="0 0 34 34" aria-hidden="true"><g fill="none" stroke="#1E1B14" stroke-width="3" stroke-linecap="round"><path d="M3 22h8M23 22h8M11 22l10-9"/></g><circle cx="11" cy="22" r="3.5" fill="#E8A325"/><circle cx="23" cy="22" r="3.5" fill="#1E1B14"/></svg><div><b>Switching command</b><small>Isolate the fault, reroute the rest</small></div></div></div>
+    <span class="mono" style="color:var(--olive)">via SCADA / DERMS</span></div>
+</div>
+<p class="foot-strip mono a"><span>Software-first</span><span>Sensor-light</span><span>Physics-checked</span></p>
 </section>
 
-<!-- 5 · PRODUCT 1 — CURTAILMENT -->
-<section class="pane curtail" id="curtail">
-  <h2 class="tag mono">04 · Product 1 — Curtailment, 1 hour ahead</h2>
-  <div class="board">
-    <div class="cell"><span class="n" data-count="96" data-after="%">0%</span><span class="l mono">event F1, unseen 2019 test year (95.4–97.3% on all 8 runs)</span></div>
-    <div class="cell"><span class="n">0.99</span><span class="l mono">network-total correlation (0.97–0.99)</span></div>
-    <div class="cell"><span class="n">+14</span><span class="l mono">F1 points over "repeat last hour" (81–84%) — range +13 to +15</span></div>
-    <div class="cell"><span class="n">−78%</span><span class="l mono">error vs predict-the-mean on the main grid (−73% to −81%)</span></div>
-  </div>
-  <div class="bars" aria-label="Event F1 per grid, German 2019 test">
-    <div class="bar-row"><span class="mono">Oberrhein · 179 bus</span><div class="track"><i class="hi" style="--w:96.2%"></i><i class="lo" style="--w:82.1%"></i></div><b class="mono">96.2 vs 82.1</b></div>
-    <div class="bar-row"><span class="mono">CIGRE MV · 15 bus</span><div class="track"><i class="hi" style="--w:95.8%"></i><i class="lo" style="--w:81.1%"></i></div><b class="mono">95.8 vs 81.1</b></div>
-    <div class="bar-row"><span class="mono">Kerber Dorf · 116 bus</span><div class="track"><i class="hi" style="--w:95.4%"></i><i class="lo" style="--w:82.7%"></i></div><b class="mono">95.4 vs 82.7</b></div>
-    <div class="bar-row"><span class="mono">Kerber Vorstadt · 294 bus</span><div class="track"><i class="hi" style="--w:95.7%"></i><i class="lo" style="--w:81.2%"></i></div><b class="mono">95.7 vs 81.2</b></div>
-    <p class="legend mono"><span class="k1"></span>Vidyut F1 <span class="k2"></span>Persistence baseline</p>
-  </div>
-  <p class="note mono">Boundary — events follow our own curtailment rule on real power flow, not a utility's logs.</p>
+<section class="slide " data-title="Product 1 · See curtailment coming" data-group="Product">
+<h2 class="tag mono a"><span class="n">04</span>Product 1 · Curtailment forecasting</h2>
+<div class="cols c12 body">
+  <div class="col a"><h2 class="disp">See it coming,<br><span class="vo">an hour early</span></h2>
+    <svg class="dg" viewBox="0 0 600 330" role="img" aria-label="Illustration: solar output rises above what the grid can absorb around midday; Vidyut warns one hour ahead">
+<line x1="50" y1="270" x2="570" y2="270" stroke="#1E1B14" stroke-width="1.5"/><line x1="50.0" y1="270" x2="50.0" y2="276" stroke="#1E1B14"/><text x="50.0" y="292" text-anchor="middle" class="soft">06:00</text><line x1="180.0" y1="270" x2="180.0" y2="276" stroke="#1E1B14"/><text x="180.0" y="292" text-anchor="middle" class="soft">09:00</text><line x1="310.0" y1="270" x2="310.0" y2="276" stroke="#1E1B14"/><text x="310.0" y="292" text-anchor="middle" class="soft">12:00</text><line x1="440.0" y1="270" x2="440.0" y2="276" stroke="#1E1B14"/><text x="440.0" y="292" text-anchor="middle" class="soft">15:00</text><line x1="570.0" y1="270" x2="570.0" y2="276" stroke="#1E1B14"/><text x="570.0" y="292" text-anchor="middle" class="soft">18:00</text>
+<polygon points="225,145.5 230,137.5 235,129.5 240,121.6 245,113.8 250,106.2 255,99.0 260,92.0 265,85.5 270,79.5 275,74.0 280,69.1 285,64.9 290,61.4 295,58.6 300,56.6 305,55.4 310,55.0 315,55.4 320,56.6 325,58.6 330,61.4 335,64.9 340,69.1 345,74.0 350,79.5 355,85.5 360,92.0 365,99.0 370,106.2 375,113.8 380,121.6 385,129.5 390,137.5 395,145.5 395,150 225,150" fill="#E8A325" opacity=".55" class="fadein"/>
+<line x1="50" y1="150" x2="570" y2="150" stroke="#1E1B14" stroke-width="2" stroke-dasharray="7 6"/>
+<text x="570" y="142" text-anchor="end">What the grid can absorb</text>
+<polyline points="50,268.7 55,268.4 60,268.1 65,267.7 70,267.2 75,266.7 80,266.1 85,265.3 90,264.5 95,263.5 100,262.3 105,261.0 110,259.6 115,257.9 120,256.0 125,253.8 130,251.4 135,248.8 140,245.8 145,242.6 150,239.0 155,235.0 160,230.8 165,226.1 170,221.2 175,215.8 180,210.1 185,204.0 190,197.6 195,190.9 200,183.9 205,176.6 210,169.1 215,161.3 220,153.5 225,145.5 230,137.5 235,129.5 240,121.6 245,113.8 250,106.2 255,99.0 260,92.0 265,85.5 270,79.5 275,74.0 280,69.1 285,64.9 290,61.4 295,58.6 300,56.6 305,55.4 310,55.0 315,55.4 320,56.6 325,58.6 330,61.4 335,64.9 340,69.1 345,74.0 350,79.5 355,85.5 360,92.0 365,99.0 370,106.2 375,113.8 380,121.6 385,129.5 390,137.5 395,145.5 400,153.5 405,161.3 410,169.1 415,176.6 420,183.9 425,190.9 430,197.6 435,204.0 440,210.1 445,215.8 450,221.2 455,226.1 460,230.8 465,235.0 470,239.0 475,242.6 480,245.8 485,248.8 490,251.4 495,253.8 500,256.0 505,257.9 510,259.6 515,261.0 520,262.3 525,263.5 530,264.5 535,265.3 540,266.1 545,266.7 550,267.2 555,267.7 560,268.1 565,268.4 570,268.7" fill="none" stroke="#77836B" stroke-width="4" class="draw"/>
+<text x="54" y="258" class="soft">Solar output</text>
+<text x="310" y="184" text-anchor="middle" class="fadein">Wasted: throttled blindly</text>
+<g class="fadein"><line x1="180.0" y1="270" x2="180.0" y2="62" stroke="#1E1B14" stroke-width="2"/>
+<circle cx="180.0" cy="62" r="7" fill="#E8A325" stroke="#1E1B14" stroke-width="2" class="blink"/>
+<text x="172.0" y="40" text-anchor="end">09:00 · Vidyut warns</text><text x="172.0" y="55" text-anchor="end" class="soft">1 hour before it binds</text></g>
+</svg>
+    <p class="note">At midday solar output exceeds what the grid can absorb. Today operators throttle blindly; Vidyut forecasts which buses will bind, one hour ahead. <span class="illus">Illustration</span></p></div>
+  <figure class="shotwrap a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Vidyut prototype · live simulation</span></div><img src="img/product/lab_live_forecast.jpg" alt="Vidyut prototype · live simulation" loading="lazy" /></div><figcaption class="cap">Amber = curtailment now · cyan = Vidyut's forecast · real 2019 test week</figcaption></figure>
+</div>
 </section>
 
-<!-- 6 · PRODUCT 2 — LOCALIZATION -->
-<section class="pane localize" id="localize">
-  <h2 class="tag mono">05 · Product 2 — Fault &amp; theft localization</h2>
-  <div class="board">
-    <div class="cell"><span class="n" data-count="99" data-after="%">0%</span><span class="l mono">exact-bus accuracy, best grid, full sensing</span></div>
-    <div class="cell"><span class="n" data-count="92" data-after="%">0%</span><span class="l mono">on the hardest grid (294 buses) — up from 6% voltage-only</span></div>
-    <div class="cell"><span class="n" data-count="89" data-after="%">0%</span><span class="l mono">still within 5 hops at 30% sensor coverage (worst grid)</span></div>
-    <div class="cell"><span class="n" data-count="300">0</span><span class="l mono">trials per grid: 30 real states × 10 faults</span></div>
-  </div>
-  <div class="bars" aria-label="Exact-bus accuracy per grid">
-    <div class="bar-row"><span class="mono">Oberrhein</span><div class="track"><i class="hi" style="--w:93.7%"></i><i class="lo" style="--w:28.3%"></i></div><b class="mono">28% → 94%</b></div>
-    <div class="bar-row"><span class="mono">CIGRE MV</span><div class="track"><i class="hi" style="--w:99.3%"></i><i class="lo" style="--w:65%"></i></div><b class="mono">65% → 99%</b></div>
-    <div class="bar-row"><span class="mono">Kerber Dorf</span><div class="track"><i class="hi" style="--w:96.3%"></i><i class="lo" style="--w:24%"></i></div><b class="mono">24% → 96%</b></div>
-    <div class="bar-row"><span class="mono">Kerber Vorstadt</span><div class="track"><i class="hi" style="--w:92.3%"></i><i class="lo" style="--w:6%"></i></div><b class="mono">6% → 92%</b></div>
-    <p class="legend mono"><span class="k1"></span>Voltage + angle + current <span class="k2"></span>Voltage only</p>
-  </div>
-  <p class="note mono">Bug found &amp; fixed: mismatched fingerprints cut accuracy 98% → 41%. At 30% coverage exact-bus accuracy is 35–59%.</p>
+<section class="slide " data-title="Product 2 · Find the fault" data-group="Product">
+<h2 class="tag mono a"><span class="n">05</span>Product 2 · Fault &amp; theft localization</h2>
+<div class="cols c21 body">
+  <div class="col a"><h2 class="disp">Every fault leaves<br>a <span class="vo">fingerprint</span></h2>
+    <svg class="dg" viewBox="0 0 760 320" role="img" aria-label="Illustration: a fault creates a voltage fingerprint across the grid, which is matched against a library of fingerprints">
+<text x="0" y="14">① A fault happens</text><line x1="24" y1="205" x2="72" y2="145" stroke="#1E1B14" stroke-width="1.8"/><line x1="24" y1="205" x2="64" y2="262" stroke="#1E1B14" stroke-width="1.8"/><line x1="72" y1="145" x2="122" y2="92" stroke="#1E1B14" stroke-width="1.8"/><line x1="72" y1="145" x2="146" y2="196" stroke="#1E1B14" stroke-width="1.8"/><line x1="146" y1="196" x2="206" y2="148" stroke="#1E1B14" stroke-width="1.8"/><line x1="146" y1="196" x2="196" y2="262" stroke="#1E1B14" stroke-width="1.8"/><line x1="122" y1="92" x2="226" y2="84" stroke="#1E1B14" stroke-width="1.8"/><line x1="206" y1="148" x2="226" y2="84" stroke="#1E1B14" stroke-width="1.8"/><circle cx="24" cy="205" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="72" cy="145" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="64" cy="262" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="122" cy="92" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="206" cy="148" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="196" cy="262" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="226" cy="84" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><circle cx="146" cy="196" r="16" fill="none" stroke="#E8A325" stroke-width="3" class="ripple"/><circle cx="146" cy="196" r="16" fill="none" stroke="#E8A325" stroke-width="3" class="ripple" style="animation-delay:1.2s"/><circle cx="146" cy="196" r="9" fill="#E8A325" stroke="#1E1B14" stroke-width="2"/>
+<text x="146" y="228" text-anchor="middle" class="soft" style="font-size:10px">fault here</text>
+<text x="266" y="14">② Sensors see a pattern</text>
+<g class="fadein"><rect x="270.0" y="231.0" width="21.0" height="19.0" fill="#E8A325"/><rect x="295.0" y="215.8" width="21.0" height="34.2" fill="#E8A325"/><rect x="320.0" y="183.5" width="21.0" height="66.5" fill="#E8A325"/><rect x="345.0" y="132.2" width="21.0" height="117.8" fill="#E8A325"/><rect x="370.0" y="79.0" width="21.0" height="171.0" fill="#E8A325"/><rect x="395.0" y="145.5" width="21.0" height="104.5" fill="#E8A325"/><rect x="420.0" y="196.8" width="21.0" height="53.2" fill="#E8A325"/><rect x="445.0" y="223.4" width="21.0" height="26.6" fill="#E8A325"/><line x1="268" y1="250" x2="468" y2="250" stroke="#1E1B14" stroke-width="1.5"/><text x="368" y="276" text-anchor="middle" class="soft">voltage dip, per bus</text></g>
+<text x="512" y="14">③ Match the library</text><g><rect x="512" y="32" width="232" height="82" fill="#FBF8F1" stroke="#1E1B14" stroke-width="1.2"/><text x="522" y="48" class="soft">bus 2</text><rect x="562.0" y="78.7" width="17.2" height="21.3" fill="#C4B9A0"/><rect x="583.2" y="60.8" width="17.2" height="39.2" fill="#C4B9A0"/><rect x="604.5" y="48.5" width="17.2" height="51.5" fill="#C4B9A0"/><rect x="625.8" y="72.0" width="17.2" height="28.0" fill="#C4B9A0"/><rect x="647.0" y="86.6" width="17.2" height="13.4" fill="#C4B9A0"/><rect x="668.2" y="93.3" width="17.2" height="6.7" fill="#C4B9A0"/><rect x="689.5" y="95.5" width="17.2" height="4.5" fill="#C4B9A0"/><rect x="710.8" y="97.2" width="17.2" height="2.8" fill="#C4B9A0"/><line x1="560" y1="100" x2="730" y2="100" stroke="#1E1B14" stroke-width="1.5"/></g><g><rect x="512" y="124" width="232" height="82" fill="#FBF8F1" stroke="#E8A325" stroke-width="3"/><text x="522" y="140" class="soft">bus 4</text><rect x="562.0" y="185.8" width="17.2" height="6.2" fill="#1E1B14"/><rect x="583.2" y="181.4" width="17.2" height="10.6" fill="#1E1B14"/><rect x="604.5" y="171.8" width="17.2" height="20.2" fill="#1E1B14"/><rect x="625.8" y="157.8" width="17.2" height="34.2" fill="#1E1B14"/><rect x="647.0" y="142.7" width="17.2" height="49.3" fill="#1E1B14"/><rect x="668.2" y="160.6" width="17.2" height="31.4" fill="#1E1B14"/><rect x="689.5" y="176.9" width="17.2" height="15.1" fill="#1E1B14"/><rect x="710.8" y="183.6" width="17.2" height="8.4" fill="#1E1B14"/><line x1="560" y1="192" x2="730" y2="192" stroke="#1E1B14" stroke-width="1.5"/><text x="736" y="140" text-anchor="end" fill="#E8A325" style="fill:#E8A325">✓ closest match</text></g><g><rect x="512" y="216" width="232" height="82" fill="#FBF8F1" stroke="#1E1B14" stroke-width="1.2"/><text x="522" y="232" class="soft">bus 6</text><rect x="562.0" y="280.6" width="17.2" height="3.4" fill="#C4B9A0"/><rect x="583.2" y="279.0" width="17.2" height="5.0" fill="#C4B9A0"/><rect x="604.5" y="276.2" width="17.2" height="7.8" fill="#C4B9A0"/><rect x="625.8" y="268.3" width="17.2" height="15.7" fill="#C4B9A0"/><rect x="647.0" y="254.9" width="17.2" height="29.1" fill="#C4B9A0"/><rect x="668.2" y="232.5" width="17.2" height="51.5" fill="#C4B9A0"/><rect x="689.5" y="250.4" width="17.2" height="33.6" fill="#C4B9A0"/><rect x="710.8" y="267.2" width="17.2" height="16.8" fill="#C4B9A0"/><line x1="560" y1="284" x2="730" y2="284" stroke="#1E1B14" stroke-width="1.5"/></g>
+<path d="M236 160 h22" stroke="#1E1B14" stroke-width="2.5" fill="none" marker-end="url(#ah)"/><path d="M480 160 h22" stroke="#1E1B14" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#1E1B14"/></marker></defs>
+</svg>
+    <p class="note">A fault at each bus dents voltage in a different pattern. Vidyut matches the pattern it sees to its library and names the bus. <span class="illus">Illustration</span></p></div>
+  <figure class="shotwrap a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Vidyut prototype · fault localization</span></div><img src="img/product/lab_fisr_locate.jpg" alt="Vidyut prototype · fault localization" loading="lazy" /></div><figcaption class="cap">Vidyut ranks candidate buses and picks bus 14 — an exact match here</figcaption></figure>
+</div>
 </section>
 
-<!-- 7 · SELF-HEALING -->
-<section class="pane heal" id="heal">
-  <h2 class="tag mono">06 · Self-healing (FISR) — trip, locate, isolate, restore</h2>
-  <div class="board">
-    <div class="cell"><span class="n" data-count="593">0</span><span class="l mono">faults swept — every feeder bus, 4 grids, 2019 peak-load hour</span></div>
-    <div class="cell"><span class="n">94–100%</span><span class="l mono">faults isolated within 3 attempts</span></div>
-    <div class="cell"><span class="n">93–100%</span><span class="l mono">of restorable power back where tie routes exist</span></div>
-    <div class="cell"><span class="n" data-count="72" data-after="%">0%</span><span class="l mono">ceiling with no tie routes — a wiring limit, not software</span></div>
-  </div>
-  <div class="bars" aria-label="Load restored per grid">
-    <div class="bar-row"><span class="mono">Oberrhein · 6 ties</span><div class="track"><i class="hi" style="--w:99.2%"></i><i class="lo" style="--w:93.5%"></i></div><b class="mono">93.5 / 99.2%</b></div>
-    <div class="bar-row"><span class="mono">CIGRE MV · 3 ties</span><div class="track"><i class="hi" style="--w:100%"></i><i class="lo" style="--w:100%"></i></div><b class="mono">100 / 100%</b></div>
-    <div class="bar-row"><span class="mono">Kerber Dorf · 0 ties</span><div class="track"><i class="hi" style="--w:72.3%"></i><i class="lo" style="--w:71.4%"></i></div><b class="mono">71.4 / 72.3%</b></div>
-    <div class="bar-row"><span class="mono">Kerber Vorstadt · 0 ties</span><div class="track"><i class="hi" style="--w:73.3%"></i><i class="lo" style="--w:71.9%"></i></div><b class="mono">71.9 / 73.3%</b></div>
-    <p class="legend mono"><span class="k1"></span>With perfect localization <span class="k2"></span>With Vidyut's localization</p>
-  </div>
-  <p class="note mono">Not modeled — protection timing, load shedding, DER anti-islanding, multi-fault events. 322 real switches on the large grid.</p>
+<section class="slide " data-title="Product 3 · Heal the grid" data-group="Product">
+<h2 class="tag mono a"><span class="n">06</span>Product 3 · Self-healing (FISR)</h2>
+<h2 class="disp a">Isolate the fault. <span class="vo">Restore the rest.</span></h2>
+<div class="frames">
+<figure class="frame a"><svg viewBox="0 0 362 130" role="img" aria-hidden="true"><line x1="24" y1="70" x2="88" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="88" y1="70" x2="152" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="152" y1="70" x2="216" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="216" y1="70" x2="280" y2="70" stroke="#E8A325" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/><line x1="280" y1="70" x2="338" y2="70" stroke="#77836B" stroke-width="3"/><polygon points="169.0,70.0 159.4,73.1 164.0,82.0 155.1,77.4 152.0,87.0 148.9,77.4 140.0,82.0 144.6,73.1 135.0,70.0 144.6,66.9 140.0,58.0 148.9,62.6 152.0,53.0 155.1,62.6 164.0,58.0 159.4,66.9" fill="#E8A325" stroke="#1E1B14" stroke-width="1.5"/><path d="M50 64 L62 76 M50 76 L62 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><rect x="14" y="60" width="20" height="20" fill="#1E1B14"/><path d="M26 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><rect x="328" y="60" width="20" height="20" fill="#1E1B14"/><path d="M340 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><circle cx="88" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M79 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="152" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M143 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="216" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M207 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="280" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M271 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/></svg><figcaption><span class="no">1</span><h3>Fault hits</h3><p>A fault trips the feeder breaker. Three neighbourhoods go dark.</p></figcaption></figure>
+<figure class="frame a"><svg viewBox="0 0 362 130" role="img" aria-hidden="true"><line x1="24" y1="70" x2="88" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="88" y1="70" x2="152" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="152" y1="70" x2="216" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="216" y1="70" x2="280" y2="70" stroke="#E8A325" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/><line x1="280" y1="70" x2="338" y2="70" stroke="#77836B" stroke-width="3"/><polygon points="169.0,70.0 159.4,73.1 164.0,82.0 155.1,77.4 152.0,87.0 148.9,77.4 140.0,82.0 144.6,73.1 135.0,70.0 144.6,66.9 140.0,58.0 148.9,62.6 152.0,53.0 155.1,62.6 164.0,58.0 159.4,66.9" fill="#E8A325" stroke="#1E1B14" stroke-width="1.5"/><circle cx="152" cy="70" r="22" fill="none" stroke="#1E1B14" stroke-width="2" stroke-dasharray="7 5"/><path d="M50 64 L62 76 M50 76 L62 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><rect x="14" y="60" width="20" height="20" fill="#1E1B14"/><path d="M26 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><rect x="328" y="60" width="20" height="20" fill="#1E1B14"/><path d="M340 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><circle cx="88" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M79 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="152" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M143 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="216" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M207 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="280" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M271 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/></svg><figcaption><span class="no">2</span><h3>Vidyut locates it</h3><p>Voltage, angle and current signatures point to the exact bus.</p></figcaption></figure>
+<figure class="frame a"><svg viewBox="0 0 362 130" role="img" aria-hidden="true"><line x1="24" y1="70" x2="88" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="88" y1="70" x2="152" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="152" y1="70" x2="216" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="216" y1="70" x2="280" y2="70" stroke="#E8A325" stroke-width="2" stroke-dasharray="3 5" opacity=".8"/><line x1="280" y1="70" x2="338" y2="70" stroke="#77836B" stroke-width="3"/><rect x="126" y="46" width="52" height="70" rx="10" fill="none" stroke="#1E1B14" stroke-width="2"/><path d="M114 64 L126 76 M114 76 L126 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><path d="M178 64 L190 76 M178 76 L190 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><path d="M50 64 L62 76 M50 76 L62 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><rect x="14" y="60" width="20" height="20" fill="#1E1B14"/><path d="M26 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><rect x="328" y="60" width="20" height="20" fill="#1E1B14"/><path d="M340 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><circle cx="88" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M79 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="152" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M143 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="216" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M207 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="280" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M271 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/></svg><figcaption><span class="no">3</span><h3>Cut out only the fault</h3><p>Two switches open around the broken section — nothing more.</p></figcaption></figure>
+<figure class="frame a"><svg viewBox="0 0 362 130" role="img" aria-hidden="true"><line x1="24" y1="70" x2="88" y2="70" stroke="#77836B" stroke-width="3"/><line x1="88" y1="70" x2="152" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="152" y1="70" x2="216" y2="70" stroke="#C4B9A0" stroke-width="3" stroke-dasharray="4 4"/><line x1="216" y1="70" x2="280" y2="70" stroke="#E8A325" stroke-width="4"/><line x1="280" y1="70" x2="338" y2="70" stroke="#77836B" stroke-width="3"/><rect x="126" y="46" width="52" height="70" rx="10" fill="none" stroke="#1E1B14" stroke-width="2"/><path d="M114 64 L126 76 M114 76 L126 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><path d="M178 64 L190 76 M178 76 L190 64" stroke="#1E1B14" stroke-width="2.4" stroke-linecap="round"/><rect x="14" y="60" width="20" height="20" fill="#1E1B14"/><path d="M26 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><rect x="328" y="60" width="20" height="20" fill="#1E1B14"/><path d="M340 64 l-5 7 h4 l-1 5 l6 -8 h-4 z" fill="#E8A325"/><circle cx="88" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M79 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/><circle cx="152" cy="70" r="6" fill="#C4B9A0" stroke="#1E1B14" stroke-width="1.5"/><path d="M143 106 v-9 l9 -8 l9 8 v9 z" fill="#C4B9A0"/><circle cx="216" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M207 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/><circle cx="280" cy="70" r="6" fill="#77836B" stroke="#1E1B14" stroke-width="1.5"/><path d="M271 106 v-9 l9 -8 l9 8 v9 z" fill="#77836B"/></svg><figcaption><span class="no">4</span><h3>Reroute the rest</h3><p>Breaker recloses, backup tie closes. Only the faulted block stays dark.</p></figcaption></figure>
+</div>
+<p class="legend mono a"><span class="k1"></span>Live <span class="k2"></span>Dark <span class="k3"></span>Backup tie <span class="illus" style="margin-left:auto">Illustration</span></p>
 </section>
 
-<!-- 8 · MAINTENANCE + SCADA -->
-<section class="pane ops" id="ops">
-  <h2 class="tag mono">07 · Supporting layers</h2>
-  <div class="ledger two">
-    <article class="entry">
-      <span class="no mono">a</span>
-      <h3>Thermal wear ranking</h3>
-      <p>I²R stress ranking per line. <b>0</b> accuracy claimed — no public equipment-failure data exists to validate one.</p>
-    </article>
-    <article class="entry">
-      <span class="no mono">b</span>
-      <h3>SCADA / DERMS bridge (mock)</h3>
-      <p>IEC 61850 tags + DNP3-style point map. Plan result <b>60.2525 MW = 60.2525 MW</b> vs the physics engine. No utility connected yet.</p>
-    </article>
-  </div>
+<section class="slide dark" data-title="The same run, live" data-group="Product">
+<h2 class="tag mono a"><span class="n">07</span>From the running prototype</h2>
+<h2 class="disp a">The same story, <span class="vo">on the real grid</span></h2>
+<div class="film">
+  <div class="fstep a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>1 · fault at bus 14</span></div><img src="img/product/lab_fisr_1_fault.jpg" alt="Fault: part of the grid goes dark" loading="lazy" /></div><h3><b>1</b>Fault hits</h3><p>The feeder trips: 46.5 of 60.9 MW still served.</p></div>
+  <div class="fstep a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>2 · isolate</span></div><img src="img/product/lab_fisr_2_isolate.jpg" alt="Isolation of the faulted section" loading="lazy" /></div><h3><b>2</b>Cut out the fault</h3><p>Only the faulted block is isolated.</p></div>
+  <div class="fstep a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>3 · restore</span></div><img src="img/product/lab_fisr_3_restore.jpg" alt="Power restored via a tie switch" loading="lazy" /></div><h3><b>3</b>Reroute the rest</h3><p>A tie switch closes: 60.4 of 60.9 MW served.</p></div>
+</div>
+<p class="note a" style="color:rgba(240,234,221,.6)">Screenshots from the running prototype (real Oberrhein grid model, AC power flow at every step). The page replays results precomputed by the real engine.</p>
 </section>
 
-<!-- 9 · WHY US -->
-<section class="pane whyus" id="whyus">
-  <h2 class="tag mono">08 · Why Vidyut wins</h2>
-  <div class="ledger three">
-    <article class="entry">
-      <span class="no mono">2</span>
-      <h3>Models, not dashboards</h3>
-      <p>Closes the loop: sends the switching command, not just a chart.</p>
-    </article>
-    <article class="entry">
-      <span class="no mono">0</span>
-      <h3>New hardware</h3>
-      <p>Runs on meters and SCADA already installed — a go-live, not a capex cycle.</p>
-    </article>
-    <article class="entry">
-      <span class="no mono">593</span>
-      <h3>Physics-checked</h3>
-      <p>Every claim comes from AC power flow on published grids, baselines included.</p>
-    </article>
-  </div>
-  <p class="aside">Software-first. Sensor-light. Physics-checked.</p>
+<section class="slide " data-title="The prototype" data-group="Product">
+<h2 class="tag mono a"><span class="n">08</span>Try it yourself</h2>
+<div class="cols c2 body">
+  <figure class="shotwrap a"><div class="win"><div class="bar"><i></i><i></i><i></i><span>Vidyut website · click any bus to break the grid</span></div><img src="img/product/web_fisr_4_restore.jpg" alt="Vidyut website · click any bus to break the grid" loading="lazy" /></div><figcaption class="cap">Interactive: pick a bus, inject a fault, watch Vidyut heal it</figcaption></figure>
+  <div class="col a"><h2 class="disp">Break the grid.<br><span class="vo">Watch it heal.</span></h2>
+    <ul class="news"><li><b>4 real grid models</b><p>Switch between a 15-bus benchmark and 294-bus feeders.</p></li><li><b>A real week of weather and demand</b><p>Play it forward and watch curtailment build.</p></li><li><b>Click any bus</b><p>Inject a fault and watch the full detect → isolate → restore sequence.</p></li></ul>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta big" href="../website/index.html" target="_blank" rel="noopener">Open the website <em>↗</em></a><a class="cta big ghost" href="../vidyut_3d_visualization.html" target="_blank" rel="noopener">Open the 3D lab <em>↗</em></a></div></div>
+</div>
 </section>
 
-<!-- 10 · TESTED -->
-<section class="pane tested" id="tested">
-  <h2 class="tag mono">09 · What's real, what isn't</h2>
-  <div class="board">
-    <div class="cell"><span class="n" data-count="1816">0</span><span class="l mono">real German days, 2015–19 (OPSD / ENTSO-E)</span></div>
-    <div class="cell"><span class="n" data-count="2099">0</span><span class="l mono">real Indian-solar days (NASA POWER) — German demand shape</span></div>
-    <div class="cell"><span class="n">20×</span><span class="l mono">the 90 days of the first prototype</span></div>
-    <div class="cell"><span class="n" data-count="0">0</span><span class="l mono">real utility incidents — all faults injected</span></div>
-  </div>
-  <div class="ledger rows">
-    <div class="entry flat"><span class="k mono">Real</span><p>4 published grids (15–294 buses), AC power flow every hour, recorded weather and demand.</p></div>
-    <div class="entry flat"><span class="k mono">Injected</span><p>Faults, theft, curtailment labels. Grids are German benchmarks, not an Indian feeder.</p></div>
-    <div class="entry flat"><span class="k mono">Verdict</span><p>Rigorous proof-of-concept on real physics. Not yet a live Indian grid.</p></div>
-  </div>
+<section class="slide " data-title="Proof" data-group="Proof">
+<h2 class="tag mono a"><span class="n">09</span>Proof, on real grid physics</h2>
+<div class="cols c3 body">
+  <article class="hl a"><span class="n" data-count="96" data-after="%">0%</span><h3>Curtailment seen coming</h3><p>One hour ahead, on a year the models never saw.</p></article>
+  <article class="hl a"><span class="n">92–99%</span><h3>Fault found exactly</h3><p>Down to the individual bus, on all four grids.</p></article>
+  <article class="hl a"><span class="n">93–100%</span><h3>Power restored</h3><p>Wherever backup routes exist.</p></article>
+</div>
+<p class="note a">Tested on 4 real grid models and 593 injected faults. Full tables in the appendix. These are simulations — see the next slide.</p>
 </section>
 
-<!-- 11 · GAPS -->
-<section class="pane gaps" id="gaps">
-  <h2 class="tag mono">10 · What's left — 6 steps</h2>
-  <div class="ledger three">
-    <article class="entry"><span class="no mono">1</span><h3>Indian feeder model</h3><p>Biggest next step.</p></article>
-    <article class="entry"><span class="no mono">2</span><h3>Indian demand data</h3><p>Replaces the German demand shape.</p></article>
-    <article class="entry"><span class="no mono">3</span><h3>Real incident data</h3><p>Needs a utility partner.</p></article>
-    <article class="entry"><span class="no mono">4</span><h3>Field pilot</h3><p>Validate on a live segment.</p></article>
-    <article class="entry"><span class="no mono">5</span><h3>Live SCADA protocols</h3><p>MMS / GOOSE / DNP3, IEC 62351.</p></article>
-    <article class="entry"><span class="no mono">6</span><h3>Cross-grid transfer</h3><p>Today: retrained per grid.</p></article>
-  </div>
+<section class="slide " data-title="What's real" data-group="Proof">
+<h2 class="tag mono a"><span class="n">10</span>What's real, what isn't</h2>
+<div class="cols c3 body">
+  <article class="rv3 real a"><h3>Real</h3><p>4 published grid models · AC power flow every hour · 5 years of recorded weather and demand</p></article>
+  <article class="rv3 inj a"><h3>Injected</h3><p>Faults and theft are simulated — no utility publishes real incidents. Grids are German benchmarks.</p></article>
+  <article class="rv3 not a"><h3>Not yet</h3><p>A live Indian feeder. A utility pilot. Real SCADA protocols.</p></article>
+</div>
+<h2 class="disp a" style="font-size:clamp(24px,4.4vh,48px)">A rigorous proof-of-concept — not yet a live grid.</h2>
 </section>
 
-<!-- 12 · ASK -->
-<section class="pane ask" id="ask">
-  <p class="meta mono"><span>11 · The ask</span></p>
-  <h2 class="lines">
-    <span class="line"><em>Partner with a feeder.</em></span>
-    <span class="line"><em>Let it fight a real one.</em></span>
-  </h2>
-  <p class="lede">Seed funding closes gaps 1–2 and buys the first field pilot (gap 4).</p>
-  <a class="cta big" href="../website/index.html" target="_blank" rel="noopener">See it run <em>↗</em></a>
-  <div class="contact mono">
-    <span>Reach the founders</span>
-    <a href="mailto:madhavtiwari.college@gmail.com" id="email-link">madhavtiwari.college@gmail.com</a>
-  </div>
+<section class="slide " data-title="Team" data-group="Team">
+<h2 class="tag mono a"><span class="n">11</span>Team of 3</h2>
+<div class="cols c3 body">
+  <article class="person a"><span class="av">AS</span><h3>Aashna</h3><span class="r mono">Co-founder</span><p><b>5</b> published / accepted AI papers — ethics, anomaly detection, sustainability, EV optimization.</p></article>
+  <article class="person a"><span class="av">AA</span><h3>Aarush Agrawal</h3><span class="r mono">Co-founder · CTO</span><p>Built the FISR engine, SCADA / DERMS layer and power-flow pipeline.</p></article>
+  <article class="person a"><span class="av">MT</span><h3>Madhav Tiwari</h3><span class="r mono">Co-founder</span><p>iOS, web and visual design — the interface and brand.</p></article>
+</div>
+<h2 class="disp a" style="font-size:clamp(24px,4.4vh,48px)">Research + engineering + product.</h2>
 </section>
 
+<section class="slide " data-title="What's next" data-group="Ask">
+<h2 class="tag mono a"><span class="n">12</span>What's next — 6 steps</h2>
+<div class="grid3x2 body">
+  <article class="next a"><span class="no">1</span><h3>Indian feeder model</h3><p>Biggest next step.</p></article>
+  <article class="next a"><span class="no">2</span><h3>Indian demand data</h3><p>Replaces the German demand shape.</p></article>
+  <article class="next a"><span class="no">3</span><h3>Real incident data</h3><p>Needs a utility partner.</p></article>
+  <article class="next a"><span class="no">4</span><h3>Field pilot</h3><p>Validate on a live segment.</p></article>
+  <article class="next a"><span class="no">5</span><h3>Live SCADA protocols</h3><p>MMS / GOOSE / DNP3, IEC 62351.</p></article>
+  <article class="next a"><span class="no">6</span><h3>Cross-grid transfer</h3><p>Today: retrained per grid.</p></article>
+</div>
+</section>
+
+<section class="slide dark" data-title="The ask" data-group="Ask">
+<div class="body" style="justify-content:center">
+  <p class="mono a" style="opacity:.6">13 · The ask</p>
+  <h2 class="disp ask-lines a">Partner with a feeder.<br><span class="vo">Let it fight a real one.</span></h2>
+  <p class="lede a">Seed funding closes gaps 1–2 and buys the first field pilot (gap 4).</p>
+  <div class="a" style="display:flex;gap:12px;flex-wrap:wrap"><a class="cta big" href="../website/index.html" target="_blank" rel="noopener">See it run <em>↗</em></a></div>
+  <div class="contact mono a"><span>Reach the founders</span><a href="mailto:madhavtiwari.college@gmail.com">madhavtiwari.college@gmail.com</a></div>
+</div>
+</section>
+
+<section class="slide " data-title="A1 · Curtailment results" data-group="Appendix">
+<h2 class="tag mono a"><span class="n">A1</span>Product 1 — curtailment, 1 hour ahead</h2>
+<div class="board a"><div class="cell"><span class="n">96%</span><span class="l mono">event F1, unseen 2019 year (95.4–97.3% on all 8 runs)</span></div><div class="cell"><span class="n">0.99</span><span class="l mono">network-total correlation (0.97–0.99)</span></div><div class="cell"><span class="n">+14</span><span class="l mono">F1 points over “repeat last hour” (81–84%); range +13 to +15</span></div><div class="cell"><span class="n">−78%</span><span class="l mono">error vs predict-the-mean, main grid (−73% to −81%)</span></div></div>
+<div class="bars a"><div class="bar-row"><span class="mono">Oberrhein · 179 bus</span><div class="track"><i class="hi" style="--w:96.2%"></i><i class="lo" style="--w:82.1%"></i></div><b class="mono">96.2 vs 82.1</b></div><div class="bar-row"><span class="mono">CIGRE MV · 15 bus</span><div class="track"><i class="hi" style="--w:95.8%"></i><i class="lo" style="--w:81.1%"></i></div><b class="mono">95.8 vs 81.1</b></div><div class="bar-row"><span class="mono">Kerber Dorf · 116 bus</span><div class="track"><i class="hi" style="--w:95.4%"></i><i class="lo" style="--w:82.7%"></i></div><b class="mono">95.4 vs 82.7</b></div><div class="bar-row"><span class="mono">Kerber Vorstadt · 294 bus</span><div class="track"><i class="hi" style="--w:95.7%"></i><i class="lo" style="--w:81.2%"></i></div><b class="mono">95.7 vs 81.2</b></div>
+<p class="legend mono"><span class="k4"></span>Vidyut F1 <span class="k3" style="height:8px;margin-left:8px"></span>Persistence baseline</p></div>
+<p class="note a">Boundary — events follow our own curtailment rule on real power flow, not a utility's logs. German data, held-out year 2019.</p>
+</section>
+
+<section class="slide " data-title="A2 · Localization results" data-group="Appendix">
+<h2 class="tag mono a"><span class="n">A2</span>Product 2 — fault &amp; theft localization</h2>
+<div class="board a"><div class="cell"><span class="n">99%</span><span class="l mono">exact-bus accuracy, best grid, full sensing</span></div><div class="cell"><span class="n">92%</span><span class="l mono">hardest grid (294 buses) — up from 6% voltage-only</span></div><div class="cell"><span class="n">89%</span><span class="l mono">within 5 hops at 30% sensor coverage (worst grid)</span></div><div class="cell"><span class="n">300</span><span class="l mono">trials per grid: 30 real states × 10 faults</span></div></div>
+<div class="bars a"><div class="bar-row"><span class="mono">Oberrhein</span><div class="track"><i class="hi" style="--w:93.7%"></i><i class="lo" style="--w:28.3%"></i></div><b class="mono">28% → 94%</b></div><div class="bar-row"><span class="mono">CIGRE MV</span><div class="track"><i class="hi" style="--w:99.3%"></i><i class="lo" style="--w:65%"></i></div><b class="mono">65% → 99%</b></div><div class="bar-row"><span class="mono">Kerber Dorf</span><div class="track"><i class="hi" style="--w:96.3%"></i><i class="lo" style="--w:24%"></i></div><b class="mono">24% → 96%</b></div><div class="bar-row"><span class="mono">Kerber Vorstadt</span><div class="track"><i class="hi" style="--w:92.3%"></i><i class="lo" style="--w:6%"></i></div><b class="mono">6% → 92%</b></div>
+<p class="legend mono"><span class="k4"></span>Voltage + angle + current <span class="k3" style="height:8px;margin-left:8px"></span>Voltage only</p></div>
+<p class="note a">Bug found &amp; fixed: mismatched fingerprints cut accuracy 98% → 41%. At 30% sensor coverage, exact-bus accuracy is 35–59%.</p>
+</section>
+
+<section class="slide " data-title="A3 · Self-healing results" data-group="Appendix">
+<h2 class="tag mono a"><span class="n">A3</span>Product 3 — self-healing (FISR)</h2>
+<div class="board a"><div class="cell"><span class="n">593</span><span class="l mono">faults swept: every feeder bus, 4 grids, 2019 peak-load hour</span></div><div class="cell"><span class="n">94–100%</span><span class="l mono">faults isolated within 3 attempts</span></div><div class="cell"><span class="n">93–100%</span><span class="l mono">of restorable power back where tie routes exist</span></div><div class="cell"><span class="n">72%</span><span class="l mono">ceiling with no tie routes — a wiring limit, not software</span></div></div>
+<div class="bars a"><div class="bar-row"><span class="mono">Oberrhein · 6 ties</span><div class="track"><i class="hi" style="--w:99.2%"></i><i class="lo" style="--w:93.5%"></i></div><b class="mono">93.5 / 99.2%</b></div><div class="bar-row"><span class="mono">CIGRE MV · 3 ties</span><div class="track"><i class="hi" style="--w:100%"></i><i class="lo" style="--w:100%"></i></div><b class="mono">100 / 100%</b></div><div class="bar-row"><span class="mono">Kerber Dorf · 0 ties</span><div class="track"><i class="hi" style="--w:72.3%"></i><i class="lo" style="--w:71.4%"></i></div><b class="mono">71.4 / 72.3%</b></div><div class="bar-row"><span class="mono">Kerber Vorstadt · 0 ties</span><div class="track"><i class="hi" style="--w:73.3%"></i><i class="lo" style="--w:71.9%"></i></div><b class="mono">71.9 / 73.3%</b></div>
+<p class="legend mono"><span class="k4"></span>With perfect localization <span class="k3" style="height:8px;margin-left:8px"></span>With Vidyut's localization</p></div>
+<p class="note a">Not modeled — protection timing, load shedding, DER anti-islanding, multi-fault events. 322 real switches on the large grid.</p>
+</section>
 </main>
 
-<footer class="base mono">
-  <span>Vidyut</span><span>Sense · Predict · Deliver</span><span>2026</span>
-</footer>
+<nav class="nav" aria-label="Slides">
+  <div class="segs" id="segs"></div>
+  <div class="navrow">
+    <button class="nb" id="prev" aria-label="Previous slide"><svg viewBox="0 0 14 14"><path d="M9 2 4 7l5 5"/></svg></button>
+    <div class="chips" id="chips"></div>
+    <span class="now" id="now"></span>
+    <button class="nb" id="ovbtn" aria-label="Slide overview (O)" title="Overview (O)"><svg viewBox="0 0 14 14"><path d="M1.5 1.5h4v4h-4zM8.5 1.5h4v4h-4zM1.5 8.5h4v4h-4zM8.5 8.5h4v4h-4z"/></svg></button>
+    <button class="nb" id="fs" aria-label="Full screen (F)" title="Full screen (F)"><svg viewBox="0 0 14 14"><path d="M1.5 5V1.5H5M9 1.5h3.5V5M12.5 9v3.5H9M5 12.5H1.5V9"/></svg></button>
+    <button class="nb" id="next" aria-label="Next slide"><svg viewBox="0 0 14 14"><path d="m5 2 5 5-5 5"/></svg></button>
+  </div>
+</nav>
 
-<script src="script.js"></script>
+<div class="ov" id="ov"><h4>All slides · click to jump · O or Esc to close</h4><div class="ovgrid" id="ovgrid"></div></div>
+
+<script src="deck.js"></script>
 </body>
 </html>

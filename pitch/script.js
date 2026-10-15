@@ -63,7 +63,7 @@ const gio = new IntersectionObserver(
   },
   { threshold: 0.1 }
 );
-document.querySelectorAll('.ticker, .board, .ledger, .rail, .list, .bars').forEach(el => gio.observe(el));
+document.querySelectorAll('.ticker, .board, .ledger, .rail, .list, .bars, .trio, .frames').forEach(el => gio.observe(el));
 
 // ---- Progress rule, header rule, scroll-spy: event-driven, no rAF loop ----
 const bar = document.getElementById('bar');

@@ -1,0 +1,47 @@
+﻿[
+    {
+        "key":  "pylon",
+        "title":  "Electrical symmetry.jpg",
+        "author":  "ANKIT KUMAR",
+        "license":  "CC BY 4.0",
+        "licurl":  "https://creativecommons.org/licenses/by/4.0",
+        "page":  "https://commons.wikimedia.org/wiki/File:Electrical_symmetry.jpg",
+        "kb":  656
+    },
+    {
+        "key":  "meters",
+        "title":  "India - Kolkata electricity meters - 3832.jpg",
+        "author":  "Jorge Royan",
+        "license":  "CC BY-SA 3.0",
+        "licurl":  "https://creativecommons.org/licenses/by-sa/3.0",
+        "page":  "https://commons.wikimedia.org/wiki/File:India_-_Kolkata_electricity_meters_-_3832.jpg",
+        "kb":  757
+    },
+    {
+        "key":  "solar",
+        "title":  "Panneaux solaires dans le désert du Thar (Rajasthan).jpg",
+        "author":  "Ji-Elle",
+        "license":  "CC BY-SA 4.0",
+        "licurl":  "https://creativecommons.org/licenses/by-sa/4.0",
+        "page":  "https://commons.wikimedia.org/wiki/File:Panneaux_solaires_dans_le_d%C3%A9sert_du_Thar_(Rajasthan).jpg",
+        "kb":  785
+    },
+    {
+        "key":  "crew",
+        "title":  "Silhouette of power line workers.jpg",
+        "author":  "Sindugab",
+        "license":  "CC BY-SA 4.0",
+        "licurl":  "https://creativecommons.org/licenses/by-sa/4.0",
+        "page":  "https://commons.wikimedia.org/wiki/File:Silhouette_of_power_line_workers.jpg",
+        "kb":  804
+    },
+    {
+        "key":  "space",
+        "title":  "2020-05-20, Sentinel-2A L1C, True color (1).jpg",
+        "author":  "Copernicus Sentinel-2, ESA",
+        "license":  "Attribution",
+        "licurl":  null,
+        "page":  "https://commons.wikimedia.org/wiki/File:2020-05-20,_Sentinel-2A_L1C,_True_color_(1).jpg",
+        "kb":  410
+    }
+]

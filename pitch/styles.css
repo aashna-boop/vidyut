@@ -177,3 +177,74 @@ body.js .rail.in,body.js .board.in,body.js .ledger.in,body.js .list.in{opacity:1
 .note{color:var(--soft);margin-top:14px;max-width:96ch;letter-spacing:.08em;line-height:1.6;text-transform:none}
 .note::before{content:"— ";color:var(--volt)}
 @media(max-width:760px){.bar-row{grid-template-columns:1fr;gap:6px}.bar-row>b{text-align:left}}
+
+/* ================= v3: pictorial problem / solution / storyboard ================= */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.trio{grid-template-columns:1fr}}
+
+/* problem cards with photos + news */
+.prob{display:flex;flex-direction:column;gap:12px;background:var(--sand);border:1.5px solid var(--coal);padding:0 0 18px}
+.prob>h3,.prob>.pict,.prob>.cap,.prob>.bignum,.prob>.big-q,.prob>.news{margin-left:18px;margin-right:18px}
+.ph{position:relative;margin:0;height:230px;overflow:hidden;background:var(--flax);border-bottom:1.5px solid var(--coal)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s var(--soft-out)}
+.prob:hover .ph img{transform:scale(1.05)}
+.ph figcaption{position:absolute;left:0;right:0;bottom:0;padding:7px 10px;background:rgba(30,27,20,.78);color:var(--paper);font-size:9.5px;line-height:1.5;letter-spacing:.08em}
+.ph figcaption span{display:block;opacity:.75;text-transform:none;letter-spacing:.02em;font-family:var(--b);font-size:10.5px}
+.ph figcaption a{text-decoration:underline;text-underline-offset:2px}
+.prob h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(24px,2.4vw,34px);line-height:1;margin-top:6px}
+.pict{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:300px}
+.hh{width:100%;height:auto;display:block}
+.cap{color:var(--soft);line-height:1.55;text-transform:none;letter-spacing:.04em}
+.bignum{display:flex;flex-direction:column;gap:2px}
+.bignum b{font-family:var(--d);font-weight:400;font-size:clamp(60px,6vw,92px);line-height:.9;color:var(--coal)}
+.bignum span{color:var(--soft)}
+.big-q{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(22px,2.2vw,30px);line-height:1.08}
+.big-q em{font-style:normal;color:var(--volt)}
+.news{list-style:none;margin-top:auto;border-top:1px solid var(--rule)}
+.news li{padding:10px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.news li:last-child{border-bottom:0}
+.news a{font-size:14px;line-height:1.35;background-image:linear-gradient(var(--volt),var(--volt));background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .35s var(--soft-out)}
+.news a:hover{background-size:100% 2px}
+.news a b{font-weight:600}
+.news span{color:var(--olive)}
+
+/* solution step cards */
+.stepcard{background:var(--sand);border:1.5px solid var(--coal);padding:26px 22px 28px;display:flex;flex-direction:column;gap:10px;transition:transform .4s var(--soft-out),background .3s}
+.stepcard:hover{transform:translateY(-6px);background:var(--paper)}
+.stepcard svg{width:68px;height:68px}
+.stepcard .k{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(28px,3vw,42px);letter-spacing:.01em;color:var(--coal);line-height:1}
+.stepcard p{color:var(--soft);font-size:16px;max-width:30ch}
+
+/* proof: 3 headline results */
+.hl{background:var(--sand);border:1.5px solid var(--coal);padding:24px 22px 26px}
+.hl .n{display:block;white-space:nowrap;font-family:var(--d);font-size:clamp(54px,6.4vw,104px);line-height:.9;font-variant-numeric:tabular-nums;margin-bottom:12px}
+.hl h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(20px,2vw,28px);line-height:1.05;margin-bottom:6px}
+.hl p{color:var(--soft);font-size:15px}
+.hl:nth-child(2) .n{color:var(--volt)}
+
+/* self-healing storyboard */
+.frames{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1000px){.frames{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.frames{grid-template-columns:1fr}}
+.frame{position:relative;margin:0;background:var(--sand);border:1.5px solid var(--coal);padding:14px 12px 16px}
+.frame .no{position:absolute;top:10px;left:12px;font-family:var(--d);font-size:30px;color:var(--volt);letter-spacing:0;line-height:1}
+.frame svg{width:100%;height:auto;display:block;margin:20px 0 6px;overflow:visible}
+.frame h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(19px,1.8vw,24px);line-height:1.05;margin-bottom:4px}
+.frame p{color:var(--soft);font-size:14px;line-height:1.45}
+.legend .k3{background:var(--volt);height:4px;margin-left:10px;transform:translateY(-2px)}
+.story .legend .k1{background:#77836B}.story .legend .k2{background:#C4B9A0}
+
+/* real / injected / not yet */
+.rv3{border:1.5px solid var(--coal);padding:22px 22px 26px;background:var(--sand)}
+.rv3 h3{font-family:var(--d);font-weight:400;text-transform:uppercase;font-size:clamp(30px,3.4vw,48px);line-height:1;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.rv3 h3::before{content:"";width:16px;height:16px;border-radius:50%}
+.rv3.real h3::before{background:var(--olive)}
+.rv3.inj h3::before{background:var(--volt)}
+.rv3.not h3::before{background:transparent;border:2.5px solid var(--coal)}
+.rv3 p{color:var(--soft);font-size:16px}
+
+.appx-head{padding-bottom:0}
+#appendix .tag{margin-bottom:0}
+body.js .trio,body.js .frames{opacity:0;transform:translateY(30px);transition:opacity .8s var(--soft-out),transform .8s var(--soft-out)}
+body.js .trio.in,body.js .frames.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){body.js .trio,body.js .frames{opacity:1;transform:none}}
